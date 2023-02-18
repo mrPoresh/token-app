@@ -1,0 +1,93 @@
+@import "src/styles.scss";
+@import "src/mixins";
+
+:host {
+    //@include standart-buttons();
+
+    .login-body {
+        width: 100%;
+        background-color: #ffffff;
+    
+        .logo {
+            padding-top: 20px;
+        }
+    
+        #login-form {
+            width: 85%;
+            max-width: 600px;
+            padding: 20px;
+    
+            .form {
+                width: 100%;
+    
+            }
+            
+        }
+    
+    }
+    
+    .buttons {
+        width: 100%;
+        padding-top: 20px;
+        margin-bottom: 20px;
+    
+        button {
+            width: 100%;
+            height: 55px;  
+            font-size: 14px;
+    
+        }
+    }
+    
+    mat-form-field {
+        width: 100%;
+        font-size: 16px;
+        text-align: left center;
+    }
+    
+    mat-label {
+        padding-left: 15px;
+    }
+    
+    ::ng-deep .mat-form-field {
+        .mat-input-element {
+            color: #000000;
+        }
+        .mat-form-field-label {
+            color: #A1A4B2;
+        }
+        .mat-form-field-flex {
+            height: 56px;
+            background-color: #F2F3F7;
+        }
+        .mat-form-field-underline {
+            background-color: #A1A4B2;
+        }
+        .mat-form-field-ripple {
+            background-color: #000000;
+        }
+        .mat-form-field-required-marker {
+            color: #000000;
+        }
+    }
+    
+    ::ng-deep .mat-form-field.mat-focused {
+        .mat-form-field-label {
+            color: #3C71CE;
+        }
+        .mat-form-field-ripple {
+            background-color: #3C71CE;
+        }
+        .mat-form-field-required-marker {
+            color: #3C71CE;
+        }
+        .mat-input-element {
+            color: #000000;
+        }
+    }
+    
+    mat-divider {
+        margin-top: 40px;
+    }
+
+}

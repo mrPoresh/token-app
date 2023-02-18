@@ -1,1 +1,151 @@
-/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/theming";
+
+@include mat-core();
+
+$mat-blue: (
+  50: #e3f2fd,
+  100: #3c71ce,
+  200: #3c71ce,
+  300: #3c71ce,
+  400: #3c71ce,
+  500: #3c71ce,
+  600: #3c71ce,
+  700: #3c71ce,
+  800: #3c71ce,
+  900: #3c71ce,
+  A100: #3c71ce,
+  A200: #3c71ce,
+  A400: #3c71ce,
+  A700: #3c71ce,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ),
+);
+
+$mat-yellow: (
+  50: #e3f2fd,
+  100: #ffc250,
+  200: #ffc250,
+  300: #ffc250,
+  400: #ffc250,
+  500: #ffc250,
+  600: #ffc250,
+  700: #ffc250,
+  800: #ffc250,
+  900: #ffc250,
+  A100: #ffc250,
+  A200: #ffc250,
+  A400: #ffc250,
+  A700: #ffc250,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ),
+);
+
+$mat-pink: (
+  50: #e3f2fd,
+  100: #fc3c6a,
+  200: #fc3c6a,
+  300: #fc3c6a,
+  400: #fc3c6a,
+  500: #fc3c6a,
+  600: #fc3c6a,
+  700: #fc3c6a,
+  800: #fc3c6a,
+  900: #fc3c6a,
+  A100: #fc3c6a,
+  A200: #fc3c6a,
+  A400: #fc3c6a,
+  A700: #fc3c6a,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ),
+);
+
+$mat-grey: (
+  50: #e3f2fd,
+  100: #ebe7e8,
+  200: #ebe7e8,
+  300: #ebe7e8,
+  400: #ebe7e8,
+  500: #ebe7e8,
+  600: #ebe7e8,
+  700: #ebe7e8,
+  800: #ebe7e8,
+  900: #ebe7e8,
+  A100: #ebe7e8,
+  A200: #ebe7e8,
+  A400: #ebe7e8,
+  A700: #ebe7e8,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ),
+);
+
+$token-app-primary: mat-palette($mat-blue);
+$token-app-accent: mat-palette($mat-yellow);
+$token-app-warn: mat-palette($mat-pink);
+$token-app-grey: mat-palette($mat-grey);
+
+$token-app-theme: mat-light-theme($token-app-primary, $token-app-accent, $token-app-warn);
+
+@include angular-material-theme($token-app-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+mat-icon {
+  color: white;
+}

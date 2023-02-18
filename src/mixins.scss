@@ -1,0 +1,22 @@
+@import "styles.scss";
+
+@mixin form-buttons {
+
+}
+
+@mixin standart-buttons {
+
+  .buttons {
+    width: 100%;
+
+    button {
+      max-width: 400px;
+      width: 100%;
+      text-transform: uppercase;
+
+      background-color: mat-color($token-app-accent, A100);
+      color: white; //
+    }
+
+  }
+}
