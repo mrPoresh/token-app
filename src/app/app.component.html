@@ -1,8 +1,7 @@
 <div class="full-wrapper" fxLayout="column" fxLayoutAlign="start center">
   <mat-sidenav-container (backdropClick)="closeMenu()">
     <mat-sidenav #sidenav>
-      <!-- <app-slide-menu [routeTrx]="routeTrx" (status)="toggleMenu($event)"></app-slide-menu> -->
-      <router-outlet name="slide-menu"></router-outlet>
+      <app-slide-menu  (status)="toggleMenu($event)"></app-slide-menu>  <!-- [routeTrx]="routeTrx" -->
     </mat-sidenav>
 
     <mat-sidenav-content>
@@ -48,7 +47,7 @@
               <mat-icon>account_circle</mat-icon>
             </button>
   
-            <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(signUpTrx)">
+            <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(testTrx)">
               <mat-icon>account_balance_wallet</mat-icon>
             </button>
   
@@ -66,7 +65,7 @@
               <mat-icon>shopping_cart</mat-icon>
             </button>
   
-            <button mat-icon-button (click)="openMenu()">
+            <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(loginTrx)">
               <mat-icon>menu</mat-icon>
             </button>
           </ng-template>

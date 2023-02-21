@@ -1,10 +1,10 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
 
 import { BasePageComponent } from './components/base-components/base-page/base-page.component';
-import { loginTrx, signUpTrx } from './router-translation.labels';
+import { loginTrx, rootTrx, signUpTrx, testTrx, menuOutlet } from './router-translation.labels';
 import { BaseHttpService } from './services/http/base-http.service';
 import { SlideMenuBtnService } from './utils/slide-menu-btn.service';
 
@@ -18,8 +18,7 @@ export class AppComponent extends BasePageComponent implements OnInit {
 
   loginTrx = loginTrx;
   signUpTrx = signUpTrx;
-
-  public routeTrx: string = '';
+  testTrx = testTrx;
 
   public isExtend = false;
   public isFull = false;
@@ -39,24 +38,9 @@ export class AppComponent extends BasePageComponent implements OnInit {
     }
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    let smallTrigger = 700;
-    let mediumTrigger = 1100;
-    if (event.target.innerWidth >= mediumTrigger) {
-      this.isFull = true;
-      this.isMedium = true;
-    } else if (event.target.innerWidth <= mediumTrigger && event.target.innerWidth >= smallTrigger) {
-      this.isFull = true;
-      this.isMedium = false;
-    } else {
-      this.isFull = false;
-      this.isMedium = false;
-    }
-  }
-
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private menuService: SlideMenuBtnService,
     private baseHttpService: BaseHttpService,
   ) {
@@ -81,6 +65,7 @@ export class AppComponent extends BasePageComponent implements OnInit {
 
   closeMenu() {
     this.menuService.updateMenuStatus(false);
+    this.router.navigate([{ outlets: { [menuOutlet] : null }}], { relativeTo: this.activatedRoute.parent });
   }
 
   toggleMenu(status: boolean) {
@@ -88,23 +73,7 @@ export class AppComponent extends BasePageComponent implements OnInit {
       this.sidenav.open();
     } else {
       this.sidenav.close();
-    }
-  }
-
-  checkHeader() {
-    let smallTrigger = 700;
-    let mediumTrigger = 1100;
-    if (window.screen.width >= mediumTrigger) {
-      this.isFull = true;
-      this.isMedium = true;
-      console.log(this.isMedium)
-      console.log(window.screen.width)
-    } else if (window.screen.width <= mediumTrigger && window.screen.width >= smallTrigger) {
-      this.isFull = true;
-      this.isMedium = false;
-    } else {
-      this.isFull = false;
-      this.isMedium = false;
+      this.router.navigate([{ outlets: { [menuOutlet] : null }}], { relativeTo: this.activatedRoute.parent });
     }
   }
 
@@ -113,9 +82,40 @@ export class AppComponent extends BasePageComponent implements OnInit {
   }
 
   navigateSlideMenu(url: string) {
-    this.routeTrx = url;
-    console.log(url)
-    this.router.navigate([{ outlets: { 'slide-menu' : [this.routeTrx] }}]);
+    this.router.navigate([{ outlets: { [menuOutlet] : [url] }}]);
   }
+
+  /* --------------------------------------------------------------------------------------------- */
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    let smallTrigger = 700;
+    let mediumTrigger = 1100;
+    if (event.target.innerWidth >= mediumTrigger) {
+      this.isFull = true;
+      this.isMedium = true;
+    } else if (event.target.innerWidth <= mediumTrigger && event.target.innerWidth >= smallTrigger) {
+      this.isFull = true;
+      this.isMedium = false;
+    } else {
+      this.isFull = false;
+      this.isMedium = false;
+    }
+  }
+  /* --------------------------------------------------------------------------------------------- */
+  checkHeader() {
+    let smallTrigger = 700;
+    let mediumTrigger = 1100;
+    if (window.screen.width >= mediumTrigger) {
+      this.isFull = true;
+      this.isMedium = true;
+    } else if (window.screen.width <= mediumTrigger && window.screen.width >= smallTrigger) {
+      this.isFull = true;
+      this.isMedium = false;
+    } else {
+      this.isFull = false;
+      this.isMedium = false;
+    }
+  }
+  /* --------------------------------------------------------------------------------------------- */
 
 }
