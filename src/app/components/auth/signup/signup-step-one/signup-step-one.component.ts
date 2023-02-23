@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 import { BasePageComponentWithDialogs } from 'src/app/components/base-components/base-page/base-page.component';
 

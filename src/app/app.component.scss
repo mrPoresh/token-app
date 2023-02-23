@@ -63,7 +63,8 @@
                     }
 
                     &.extend { 
-                        background-color: mat-color($token-app-grey, A200);
+                        //background-color: mat-color($mat-grey, A200);
+                        background-color: #ebe7e8;
                         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
 
                         .mat-icon {
@@ -75,7 +76,8 @@
                         }
 
                         .mat-flat-button {
-                            background-color: mat-color($token-app-grey, A200);
+                            /* background-color: mat-color($mat-grey, A200); */
+                            background-color: #ebe7e8;
                             color: black;
                         }
                     }
@@ -122,7 +124,8 @@
 
 @media (touch-action: 50px) {
     .header {
-        background-color: mat-color($token-app-grey, A200);
+        //background-color: mat-color($mat-grey, A200);
+        background-color: #ebe7e8;
     }
 }
 

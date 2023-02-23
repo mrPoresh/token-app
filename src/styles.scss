@@ -101,7 +101,7 @@ $mat-pink: (
   ),
 );
 
-$mat-grey: (
+/* $mat-grey: (
   50: #e3f2fd,
   100: #ebe7e8,
   200: #ebe7e8,
@@ -132,12 +132,12 @@ $mat-grey: (
     A400: $light-primary-text,
     A700: $light-primary-text,
   ),
-);
+); */
 
 $token-app-primary: mat-palette($mat-blue);
 $token-app-accent: mat-palette($mat-yellow);
 $token-app-warn: mat-palette($mat-pink);
-$token-app-grey: mat-palette($mat-grey);
+//$token-app-grey: mat-palette($mat-grey);
 
 $token-app-theme: mat-light-theme($token-app-primary, $token-app-accent, $token-app-warn);
 
