@@ -1,0 +1,36 @@
+<div class="signup-wrapper" fxLayout="column" fxLayoutAlign="start center">
+    <div class="registration-header">
+        <ng-container [ngSwitch]="selectedIndex">
+            <div class="header" *ngSwitchCase="0" fxLayout="column" fxLayoutAlign="start center">
+                <img class="logo" src="assets/icons/acc_data.png">
+                <h4>Account data</h4>
+            </div>
+
+            <div class="header" *ngSwitchCase="1" fxLayout="column" fxLayoutAlign="start center">
+                <img class="logo" src="assets/icons/acc_user_info.png">
+                <h4>User info</h4>
+            </div>
+
+            <div class="header" *ngSwitchCase="2" fxLayout="column" fxLayoutAlign="start center">
+                <img class="logo" src="assets/icons/acc_data.png">
+                <h4>Cougratulation!</h4>
+            </div>
+        </ng-container>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <mat-horizontal-stepper [linear]="isLinear" labelPosition="bottom" #stepper>    <!-- add icons changing ! -->
+        <mat-step [stepControl]="step1.registerForm1" [completed]="isCompleted1" [editable]="isEditable">
+            <app-signup-step-one #step1 (isCompleted)="completeStepOne($event)"></app-signup-step-one>
+        </mat-step>
+
+        <mat-step [stepControl]="step2.registerForm2" [completed]="isCompleted2" [editable]="isEditable">
+            <app-signup-step-two #step2 (isCompleted)="completeStepTwo($event)"></app-signup-step-two>
+        </mat-step>
+
+        <mat-step [completed]="isCompleted3" [editable]="isEditable">
+            <app-signup-step-three></app-signup-step-three>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

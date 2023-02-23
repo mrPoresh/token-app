@@ -6,9 +6,9 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { environment } from 'src/environments/environment';
 
-export const LOGIN_EMAIL_URL: string = "/umg/login";
+export const LOGIN_EMAIL_URL: string = "/umg/signin";
 export const CHECK_SESSION: string = "/user/check-session/";
-export const USER_INFO_SESSION: string = "/users/info"
+export const USER_INFO_SESSION: string = "/umg/info"
 export const USER_FULL_DETAILS: string = "/user/details/?with_payment=1"
 
 @Injectable({
@@ -30,7 +30,7 @@ export class BaseHttpService {
     this.apiUrl = apiUrl;
   }
 
-  createHeaders(/* headers: {[name: string]: string | string[]; } = {} */): HttpHeaders {
+/*   createHeaders(headers: {[name: string]: string | string[]; } = {} ): HttpHeaders {
     const headers = new HttpHeaders({
       'Content-Type':  'application/json',
       'Access-Control-Allow-Credentials' : 'true',
@@ -39,19 +39,30 @@ export class BaseHttpService {
     });
     console.log('heders', headers)
     return headers
-  }
+  } */
 
-  public get(url: string) {
+/*   public get<T>(url: string) {
     const headers = this.createHeaders()
-    return this.http.get(this.apiUrl + url);
+    return this.http.get<T>(this.apiUrl + url);
+  } */
+
+  createHeaders(token?: string) {
+    console.log(token)
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+/*     if (token) {
+      headers.set('Authorization', `Bearer ${token}`)
+    } */
+    return headers
   }
 
-  public postRequest<T>(url: string, formGroup: FormGroup) {
-    return this.http.post<T>(this.apiUrl + url, formGroup.value, {'headers': this.createHeaders()});
+  public postRequest<T>(url: string, formGroup: FormGroup, token?: string) {
+    let headers = this.createHeaders(token);
+    return this.http.post<T>(this.apiUrl + url, { headers: headers, params: formGroup.value });
   }
 
-  public getRequest<T>(url: string, formGroup: FormGroup) {
-    return this.http.get<T>(this.apiUrl + url, { params: formGroup.value });
+  public getRequest<T>(url: string, formGroup?: FormGroup, token?: string) {
+  let headers = this.createHeaders(token);
+    return this.http.get<T>(this.apiUrl + url, { headers: headers, params: formGroup?.value });
   }
   
 }

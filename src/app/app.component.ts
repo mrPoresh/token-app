@@ -5,6 +5,8 @@ import { takeUntil } from 'rxjs';
 
 import { BasePageComponent } from './components/base-components/base-page/base-page.component';
 import { loginTrx, rootTrx, signUpTrx, testTrx, menuOutlet } from './router-translation.labels';
+import { LoggedStatus } from './services/auth/auth.models';
+import { CheckSessionService } from './services/auth/check-session/check-session.service';
 import { BaseHttpService } from './services/http/base-http.service';
 import { SlideMenuBtnService } from './utils/slide-menu-btn.service';
 
@@ -17,7 +19,6 @@ export class AppComponent extends BasePageComponent implements OnInit {
   title = 'token-market';
 
   loginTrx = loginTrx;
-  signUpTrx = signUpTrx;
   testTrx = testTrx;
 
   public isExtend = false;
@@ -43,6 +44,7 @@ export class AppComponent extends BasePageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private menuService: SlideMenuBtnService,
     private baseHttpService: BaseHttpService,
+    private checkSessionService: CheckSessionService
   ) {
     super()
   }
@@ -54,8 +56,15 @@ export class AppComponent extends BasePageComponent implements OnInit {
         this.toggleMenu(res);
       }
     });
-
-    this.baseHttpService.get('/').subscribe((res) => console.log('res', res))
+    
+    this.checkSessionService.requestCheckSession().pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+      console.log('App Comp User', res);
+      if (res.isLogged === LoggedStatus.logged) {
+        this.isLogged = true
+      } else {
+        this.isLogged = false
+      }
+    });
 
   }
 

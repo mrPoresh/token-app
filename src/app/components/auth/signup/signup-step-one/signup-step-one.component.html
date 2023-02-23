@@ -1,0 +1,43 @@
+<div class="step-body" fxLayout="column" fxLayoutAlign="center center">
+    <div id="signup-form">
+        <form name="registerForm1" [formGroup]="registerForm1" (ngSubmit)="onSubmit(registerForm1)" fxLayout="column" fxLayoutAlign="center center">
+            <mat-form-field appearance="legacy">
+                <mat-label i18n>Email</mat-label>
+                <mat-error *ngIf="registerForm1.get('username')?.hasError('required')" i18n>Please enter your email.</mat-error>
+                <mat-error *ngIf="registerForm1.get('username')?.hasError('email')" i18n>Please check your e-mail.</mat-error>
+                <!-- <mat-error *ngIf="registerForm1.get('username')?.errors?.serverError">
+                    {{ registerForm1.get('username').errors?.serverError }}
+                </mat-error> -->
+                <input matInput type="text" formControlName="username">
+            </mat-form-field>
+
+            <span></span>
+
+            <mat-form-field appearance="legacy">
+                <mat-label i18n>Password</mat-label>
+                <input matInput formControlName="password"> <!-- [type]="hidePassword ? 'password' : 'text'" -->
+                <!-- <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+                <mat-error *ngIf="registerForm1.get('password')?.hasError('required')" i18n>Please enter your password.</mat-error>
+                <mat-error *ngIf="registerForm1.get('password')?.hasError('minlength')" i18n>Your password is too short.</mat-error>
+                <!-- <mat-error *ngIf="registerForm1.get('password')?.hasError('pattern')">
+                    {{registerForm1.get('password').errors.pattern.msg}}
+                </mat-error> -->
+                <!-- <mat-error *ngIf="registerForm1.get('password')?.errors?.serverError">
+                    {{ registerForm1.get('password').errors?.serverError }}
+                </mat-error> -->
+            </mat-form-field>
+
+            <div class="buttons">
+                <button mat-flat-button color="primary" type="submit">SUMBIT</button>
+            </div>
+
+        </form>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="buttons" fxLayout="column" fxLayoutAlign="center center">
+        <button mat-flat-button style="width: 90%;" routerLink="/login">You already have an account?</button>
+        <button mat-flat-button style="width: 90%;" routerLink="/login" color="accent">LOG IN</button>
+    </div>
+</div>

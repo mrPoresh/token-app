@@ -7,9 +7,33 @@ export enum LoggedStatus {
 export interface UserInfo {
     isLogged: LoggedStatus;
     username?: string;
-    language?: string;
-    currency?: string;
-    isLoggedFirebase?: LoggedStatus;
+    wallets?: Wallet[]
+}
+
+export interface Wallet {
+    xpub: string,
+    accounts?: Account[],
+    deposits?: Deposit[]
+}
+
+export interface Account {
+    currency: string,
+    active: boolean,
+    frozen: boolean,
+    balance: {
+        accountBalance: string,
+        availableBalance: string,
+    },
+    xpub: string,
+    accountingCurrency: string,
+    id: string
+} 
+
+export interface Deposit {
+    xpub: string,
+    derivationKey: number,
+    address: string,
+    currency: string,
 }
 
 export interface LoginEmailResponse {

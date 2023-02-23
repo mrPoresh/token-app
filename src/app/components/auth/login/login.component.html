@@ -18,8 +18,8 @@
                 <button mat-flat-button routerLink="/lost-password">Reset Password</button>
                 <button mat-stroked-button color="primary" routerLink="/connect-wallet">CONNECT WALLET</button>
                 <mat-divider></mat-divider>
-                <button mat-flat-button routerLink="/signup">Dont you have an account yet?</button>
-                <button mat-flat-button routerLink="/signup" color="accent">REGISTER</button>
+                <button mat-flat-button (click)="navigateSlideMenu(signUpTrx)">Dont you have an account yet?</button>
+                <button mat-flat-button (click)="navigateSlideMenu(signUpTrx)" color="accent">REGISTER</button>
             </div>
         </form>
     </div>

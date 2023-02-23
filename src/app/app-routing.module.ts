@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { loginTrx, rootTrx, testTrx } from './router-translation.labels';
+import { loginTrx, rootTrx, signUpTrx, testTrx } from './router-translation.labels';
 
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { SlideMenuComponent } from './components/slide-menu/slide-menu.component';
+import { SignupFormComponent } from './components/auth/signup/signup-form/signup-form.component';
 
 
 const routes: Routes = [
@@ -16,11 +16,11 @@ const routes: Routes = [
     path: loginTrx, outlet: 'menu', component: LoginComponent
   },
   {
+    path: signUpTrx, outlet: 'menu', component: SignupFormComponent
+  },
+  {
     path: testTrx, outlet: 'menu', component: FrontPageComponent
   }
-/*   {
-    path: rootTrx, outlet: 'front-page', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
-  }, */
 ];
 
 @NgModule({

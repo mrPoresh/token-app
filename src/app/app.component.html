@@ -42,11 +42,15 @@
         </div>
     
         <div class="icon-box" fxLayout="row" fxLayoutAlign="center center"> 
-          <div *ngIf="isFull else mobile">
-            <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(loginTrx)">  <!-- (click)="navigate(loginTrx)" -->
+          <div *ngIf="isFull else mobile" fxLayout="row" fxLayoutAlign="space-between center">
+            <button *ngIf="!isLogged else account" mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(loginTrx)">  <!-- (click)="navigate(loginTrx)" -->
               <mat-icon>account_circle</mat-icon>
             </button>
   
+            <ng-template #account>
+              <img src="/assets/icons/user_avatar.png" style="width: 40px; border-radius: 50%;">
+            </ng-template>
+
             <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(testTrx)">
               <mat-icon>account_balance_wallet</mat-icon>
             </button>

@@ -1,12 +1,13 @@
 import { Injectable, Inject, LOCALE_ID } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, share, switchMap } from 'rxjs/operators';
+import { catchError, map, share, switchMap } from 'rxjs/operators';
 import { CheckSessionResponse } from './check-session.models';
-import { BaseHttpService, CHECK_SESSION } from '../../http/base-http.service';
+import { BaseHttpService, USER_INFO_SESSION } from '../../http/base-http.service';
 import {CookieService } from 'ngx-cookie-service';
 import { LoginStatusService } from '../login/login-status.service';
 import { UserInfo, LoggedStatus } from '../auth.models';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -14,27 +15,32 @@ import { UserInfo, LoggedStatus } from '../auth.models';
 export class CheckSessionService extends BaseHttpService {
 
 
-  constructor(http:HttpClient,cookie:CookieService,private loginStatusService:LoginStatusService) {
+  constructor(http: HttpClient, cookie: CookieService, private loginStatusService: LoginStatusService, public formBuilder: FormBuilder) {
     super(http,cookie);
   }
 
-/*   public requestCheckSession (): Observable<UserInfo> {
-    return this.get<string>(CHECK_SESSION).pipe(
-      switchMap((resp) => {
-        this.loginStatusService.updateUserInfo({
-          isLogged: resp === "OK" ? LoggedStatus.logged : LoggedStatus.notLogged,
-        });
-        return this.loginStatusService.getLoginStatus();
-      }),
-      catchError((error: HttpErrorResponse) =>{
-        if (error.status===403){
+  public requestCheckSession () {
+    const token = this.cookie.get('session');
+    if (token) {
+      console.log('token exist', token)
+      return this.getRequest<UserInfo>(USER_INFO_SESSION, undefined, token).pipe(
+        map((res) => {
           this.loginStatusService.updateUserInfo({
-            isLogged:  LoggedStatus.notLogged,
+            isLogged: LoggedStatus.logged,
+            username: res.username,
+            wallets: res.wallets
           });
-        }
-        // return an observable with a user-facing error message
-        return this.loginStatusService.getLoginStatus();
-      })
-    );
-  } */
+        }),
+        switchMap(() => this.loginStatusService.getLoginStatus()),
+        catchError((err) => {
+          this.loginStatusService.updateUserInfo({isLogged: LoggedStatus.notLogged});
+          return this.loginStatusService.getLoginStatus();
+        })
+      );
+    } else {
+      console.log('token dont exist');
+      this.loginStatusService.updateUserInfo({isLogged: LoggedStatus.notLogged});
+      return this.loginStatusService.getLoginStatus();
+    }
+  }
 }

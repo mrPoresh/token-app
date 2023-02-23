@@ -12,6 +12,10 @@ import { BasePageComponent } from './components/base-components/base-page/base-p
 import { SlideMenuComponent } from './components/slide-menu/slide-menu.component';
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { SignupFormComponent } from './components/auth/signup/signup-form/signup-form.component';
+import { SignupStepOneComponent } from './components/auth/signup/signup-step-one/signup-step-one.component';
+import { SignupStepTwoComponent } from './components/auth/signup/signup-step-two/signup-step-two.component';
+import { SignupStepThreeComponent } from './components/auth/signup/signup-step-three/signup-step-three.component';
 
 
 @NgModule({
@@ -21,7 +25,11 @@ import { LoginComponent } from './components/auth/login/login.component';
     BasePageComponent,
     SlideMenuComponent,
     FrontPageComponent,
-    LoginComponent
+    LoginComponent,
+    SignupFormComponent,
+    SignupStepOneComponent,
+    SignupStepTwoComponent,
+    SignupStepThreeComponent
   ],
   imports: [
     BrowserModule,
