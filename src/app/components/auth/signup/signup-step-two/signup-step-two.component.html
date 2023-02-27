@@ -1,19 +1,19 @@
 <div class="step-body" fxLayout="column" fxLayoutAlign="center center">
     <div id="signup-form">
         <form name="registerForm2" [formGroup]="registerForm2" (ngSubmit)="onSubmit(registerForm2)" fxLayout="column" fxLayoutAlign="center center">
-            <mat-form-field class="input" appearance="legacy">
+            <mat-form-field class="input" >
                 <mat-label i18n>First Name</mat-label>
                 <mat-error *ngIf="registerForm2.get('username')?.hasError('required')" i18n>Please enter your First name.</mat-error>
                 <!-- <mat-error *ngIf="registerForm1.get('username')?.hasError('email')" i18n>Please check your e-mail.</mat-error> -->
                 <!-- <mat-error *ngIf="registerForm1.get('username')?.errors?.serverError">
                     {{ registerForm1.get('username').errors?.serverError }}
                 </mat-error> -->
-                <input matInput type="text" formControlName="firstName">
+                <input matInput type="text" formControlName="firstname">
             </mat-form-field>
 
             <span></span>
 
-            <mat-form-field class="input" appearance="legacy">
+            <mat-form-field class="input" >
                 <mat-label i18n>Surname</mat-label>
                 <input matInput formControlName="surname"> <!-- [type]="hidePassword ? 'password' : 'text'" -->
                 <!-- <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon> -->
@@ -30,16 +30,14 @@
             <span></span>
 
             <div class="options" fxLayout="row" fxLayoutAlign="space-between center">
-                <mat-form-field class="select" appearance="legacy">
-                    <mat-label i18n>Option</mat-label>
-                    <mat-select>
-                        <mat-option>Option 1</mat-option>
-                        <mat-option>Option 2</mat-option>
-                        <mat-option>Option 3</mat-option>
+                <mat-form-field class="select" >
+                    <mat-label i18n>Wallet Currency</mat-label>
+                    <mat-select formControlName="currency">
+                        <mat-option *ngFor="let cur of currency" [value]="cur.value">{{cur.viewValue}}</mat-option>
                       </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="select" appearance="legacy">
+                <mat-form-field class="select" >
                     <mat-label i18n>Option</mat-label>
                     <mat-select>
                         <mat-option>Option 1</mat-option>

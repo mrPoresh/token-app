@@ -1,0 +1,19 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+@use "../colors";
+@use "../typography_config" as typography;
+
+$light-primary: mat.define-palette(colors.$mat-blue);
+$light-accent: mat.define-palette(colors.$mat-yellow);
+$light-warn: mat.define-palette(colors.$mat-pink);
+
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $light-primary,
+      accent: $light-accent,
+      warn: $light-warn,
+    ),
+    typography: typography.$app-typography
+  )
+);

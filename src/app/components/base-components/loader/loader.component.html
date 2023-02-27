@@ -1,0 +1,14 @@
+<div *ngIf="isShow && !tasks[0]" class="content" fxLayoutAlign="center start"  fxLayout="row">
+    <img src="assets/icons/large_logo.png"/>
+</div>
+
+<div *ngIf="isShow && tasks[0]" class="content"  fxLayout="column" fxLayoutAlign="start center">
+    <img src="assets/icons/large_logo.png"/>
+
+    <mat-card>
+        <mat-card-content *ngFor="let task of tasks" fxLayout="row">
+            <mat-spinner [diameter]="30"></mat-spinner>
+            <h1 style="padding-left: 10px;">{{task.task}}</h1>
+        </mat-card-content>
+    </mat-card>
+</div>

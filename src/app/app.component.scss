@@ -1,9 +1,6 @@
-@import "../styles.scss";
-@import "src/mixins";
-
 
 :host {
-    @include standart-buttons();
+    /* @include standart-buttons(); */
 
     .full-wrapper {
         width: 100%;
@@ -39,51 +36,61 @@
                     position: fixed;
 
                     display: flex;
-                    justify-content: space-between;
+                    //justify-content: space-between;
         
                     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+
+                    .mat-icon {
+                        color: white
+                    }
+
+                    h2 {
+                        color: white;
+                        margin: 0;
+                    }
+
+                    h4 {
+                        color: white;
+                        margin: 0;
+                    }
 
                     &.default {
                         background-color: rgba(0, 0, 0, 0.075);
                         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.125);
 
-                        .mat-flat-button {
+                        .action-box-btn {
                             background-color: rgba(0, 0, 0, 0);
-                            color: white;
-                        }
-
-                        .mat-icon {
-                            color: white
-                        }
-
-                        h2 {
                             color: white;
                         }
 
                     }
 
                     &.extend { 
-                        //background-color: mat-color($mat-grey, A200);
-                        background-color: #ebe7e8;
+                        background-color: #3c71ce;
                         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
 
-                        .mat-icon {
-                            color: black
+                        .action-box-btn {
+                            background-color: #3c71ce ; 
+                            color: white;
                         }
+                    }
+                    
+                    .logo-box {
+                        text-align: center;
+                    }
 
-                        h2 {
-                            color: black;
-                        }
+                    .search-box {
+                        flex-grow: 2;
 
-                        .mat-flat-button {
-                            /* background-color: mat-color($mat-grey, A200); */
-                            background-color: #ebe7e8;
-                            color: black;
+                        .search-bar {
+                            width: 90%;
+                            max-width: 800px;
+                            padding-top: 20px;
                         }
                     }
         
                     .icon-box {
-                        justify-self: right;
+                        //justify-self: right;
 
                         .mat-icon-button {
                             margin: 10px;
@@ -98,18 +105,11 @@
                     }  
 
                     .action-box {
+                        padding-left: 20px;
+                        padding-right: 20px;
 
-                        .mat-flat-button {
+                        .action-box-btn {
                             width: 100px;
-                        }
-                    }
-
-                    .search-box {
-                        flex-grow: 2;
-
-                        .search-bar {
-                            width: 90%;
-                            max-width: 600px;
                         }
                     }
                 }
@@ -125,7 +125,7 @@
 @media (touch-action: 50px) {
     .header {
         //background-color: mat-color($mat-grey, A200);
-        background-color: #ebe7e8;
+        background-color: #3c71ce;
     }
 }
 

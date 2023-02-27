@@ -44,6 +44,7 @@ export class LoginComponent extends BasePageComponent implements OnInit {
   }
 
   navigateSlideMenu(url: string) {
+    console.log('url', url)
     this.router.navigate([{ outlets: { [menuOutlet] : [url] }}]);
   }
 

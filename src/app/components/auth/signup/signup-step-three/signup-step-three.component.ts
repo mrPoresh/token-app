@@ -1,18 +1,22 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
-import { BasePageComponentWithDialogs } from 'src/app/components/base-components/base-page/base-page.component';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BasePageComponent } from 'src/app/components/base-components/base-page/base-page.component';
 
 @Component({
   selector: 'app-signup-step-three',
   templateUrl: './signup-step-three.component.html',
   styleUrls: ['./signup-step-three.component.scss']
 })
-export class SignupStepThreeComponent extends BasePageComponentWithDialogs implements OnInit {
+export class SignupStepThreeComponent extends BasePageComponent implements OnInit {
+
+  @Input() mnemonic!: string;
 
   constructor(
-    errorDialog: MatDialog,
+
   ) {
-    super(errorDialog)
+    super()
+  }
+  ngOnInit() {
+
   }
 
 }

@@ -1,39 +1,45 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
-import { BasePageComponentWithDialogs } from 'src/app/components/base-components/base-page/base-page.component';
+import { BasePageComponent } from 'src/app/components/base-components/base-page/base-page.component';
 
 @Component({
   selector: 'app-signup-step-two',
   templateUrl: './signup-step-two.component.html',
   styleUrls: ['./signup-step-two.component.scss']
 })
-export class SignupStepTwoComponent extends BasePageComponentWithDialogs implements OnInit {
+export class SignupStepTwoComponent extends BasePageComponent implements OnInit {
+
+  currency: any[] = [
+    {value: 'LTC', viewValue: 'LTC'},
+    {value: 'ETH', viewValue: 'ETH'},
+    {value: 'BTC', viewValue: 'BTC'},
+  ];
 
   formSubmited = false;
 
   registerForm2 = this.formBuilder.group({
-    firstName: new FormControl('', [ Validators.required ]),
+    firstname: new FormControl('', [ Validators.required ]),
     surname: new FormControl('', [ Validators.required ]),
+    currency: new FormControl(''),
     acceptTerms: new FormControl('', [ Validators.required ]),
     emailSpam: new FormControl('', [ Validators.required ]),
   });
 
-  @Output() isCompleted = new EventEmitter<boolean>();
+  @Output() stepTwo = new EventEmitter<{isCompleted: boolean, dataForm: FormGroup}>();
 
   constructor(
-    errorDialog: MatDialog,
     private formBuilder: FormBuilder,
   ) {
-    super(errorDialog)
+    super()
+  }
+  ngOnInit() {
+
   }
 
   onSubmit(registerForm2: FormGroup) {
     if (this.formSubmited || !this.registerForm2.valid) return;
-    console.log("Form 2 ->", registerForm2);
-    this.isCompleted.next(true);
-
+    this.stepTwo.next({isCompleted: true, dataForm: registerForm2});
   }
 
 }

@@ -7,9 +7,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 
 export const LOGIN_EMAIL_URL: string = "/umg/signin";
+export const SIGNUP_URL: string = "/umg/signup";
 export const CHECK_SESSION: string = "/user/check-session/";
 export const USER_INFO_SESSION: string = "/umg/info"
-export const USER_FULL_DETAILS: string = "/user/details/?with_payment=1"
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,6 @@ export class BaseHttpService {
     protected cookie: CookieService
   ) { 
     this.apiUrl = environment.apiUrl;
-    console.log('api Url');
   }
 
   setApiUrl(apiUrl: string) {

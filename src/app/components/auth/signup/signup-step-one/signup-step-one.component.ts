@@ -1,15 +1,18 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { Router } from '@angular/router';
 
-import { BasePageComponentWithDialogs } from 'src/app/components/base-components/base-page/base-page.component';
+import { BasePageComponent } from 'src/app/components/base-components/base-page/base-page.component';
+import { menuOutlet, loginTrx } from 'src/app/router-translation.labels';
 
 @Component({
   selector: 'app-signup-step-one',
   templateUrl: './signup-step-one.component.html',
   styleUrls: ['./signup-step-one.component.scss']
 })
-export class SignupStepOneComponent extends BasePageComponentWithDialogs implements OnInit {
+export class SignupStepOneComponent extends BasePageComponent implements OnInit {
+
+  loginTrx = loginTrx;
 
   hidePassword = true;
   formSubmited = false;
@@ -19,19 +22,25 @@ export class SignupStepOneComponent extends BasePageComponentWithDialogs impleme
     password: new FormControl('', [ Validators.required, Validators.minLength(7) ]),
   });
 
-  @Output() isCompleted = new EventEmitter<boolean>();
+  @Output() stepOne = new EventEmitter<{isCompleted: boolean, emailForm: FormGroup}>();
 
   constructor(
-    errorDialog: MatDialog,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) {
-    super(errorDialog) 
+    super() 
+  }
+  ngOnInit() {
+
+  }
+
+  navigateSlideMenu(url: string) {
+    this.router.navigate([{ outlets: { [menuOutlet] : [url] }}]);
   }
 
   onSubmit(registerForm1: FormGroup) {
     if (this.formSubmited || !this.registerForm1.valid) return;
-    console.log("Form 1 ->", registerForm1);
-    this.isCompleted.next(true);
+    this.stepOne.next({isCompleted: true, emailForm: registerForm1});
 
   }
 

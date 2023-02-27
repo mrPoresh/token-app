@@ -36,15 +36,4 @@ export class LoginEmailService extends BaseHttpService {
     );
   }
 
-/*     requestLoginUser(loginForm: FormGroup) {
-        return super.postRequest<LoginEmailResponse>(LOGIN_EMAIL_URL, loginForm)
-            .pipe(
-                map((loginResp) => {
-                    this.cookie.set("session", loginResp.data.token);
-                    console.log('token', loginResp.data.token);
-                    return loginResp;
-                }),
-            );
-    } */
-
 }

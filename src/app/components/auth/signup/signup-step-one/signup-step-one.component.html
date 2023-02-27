@@ -1,7 +1,7 @@
 <div class="step-body" fxLayout="column" fxLayoutAlign="center center">
     <div id="signup-form">
         <form name="registerForm1" [formGroup]="registerForm1" (ngSubmit)="onSubmit(registerForm1)" fxLayout="column" fxLayoutAlign="center center">
-            <mat-form-field appearance="legacy">
+            <mat-form-field>
                 <mat-label i18n>Email</mat-label>
                 <mat-error *ngIf="registerForm1.get('username')?.hasError('required')" i18n>Please enter your email.</mat-error>
                 <mat-error *ngIf="registerForm1.get('username')?.hasError('email')" i18n>Please check your e-mail.</mat-error>
@@ -13,7 +13,7 @@
 
             <span></span>
 
-            <mat-form-field appearance="legacy">
+            <mat-form-field>
                 <mat-label i18n>Password</mat-label>
                 <input matInput formControlName="password"> <!-- [type]="hidePassword ? 'password' : 'text'" -->
                 <!-- <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon> -->
@@ -37,7 +37,7 @@
     <mat-divider></mat-divider>
 
     <div class="buttons" fxLayout="column" fxLayoutAlign="center center">
-        <button mat-flat-button style="width: 90%;" routerLink="/login">You already have an account?</button>
-        <button mat-flat-button style="width: 90%;" routerLink="/login" color="accent">LOG IN</button>
+        <button mat-flat-button style="width: 90%;" (click)="navigateSlideMenu(loginTrx)">You already have an account?</button>
+        <button mat-flat-button style="width: 90%;" (click)="navigateSlideMenu(loginTrx)" color="accent">LOG IN</button>
     </div>
 </div>

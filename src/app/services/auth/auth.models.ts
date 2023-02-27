@@ -7,6 +7,8 @@ export enum LoggedStatus {
 export interface UserInfo {
     isLogged: LoggedStatus;
     username?: string;
+    surname?: string;
+    firstname?: string;
     wallets?: Wallet[]
 }
 
@@ -39,5 +41,12 @@ export interface Deposit {
 export interface LoginEmailResponse {
     data: {
         token: string;
+    }
+}
+
+export interface RegistrationResponse {
+    data: {
+        token: string,
+        mnemonic: string,
     }
 }

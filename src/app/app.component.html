@@ -5,16 +5,15 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <mat-toolbar class="header" [ngClass]="(!isExtend) ? 'default': 'extend'" > <!-- fxLayout="row" fxLayoutAlign="space-between center" -->
-        <div fxLayout="row" fxLayoutAlign="center center" style="text-align: center;">
-          <img src="/assets/icons/large_logo.png" style="width: 50px;">
-          <h2 style="padding-left: 10px;">TokensMarket</h2>
+      <mat-toolbar class="header" [ngClass]="(!isExtend) ? 'default': 'extend'" fxLayout="row" fxLayoutAlign="space-between center"> <!-- fxLayout="row" fxLayoutAlign="space-between center" -->
+        <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+          <img src="/assets/icons/large_logo.png" style="object-fit: cover; height: 50px; padding-right: 20px;">
+          <h2 >TokensMarket</h2>
         </div>
 
-        <!-- ----------------------------------------------------------------- -->
         <div class="search-box" *ngIf="isFull" fxLayout="row" fxLayoutAlign="center center">
           <mat-form-field class="search-bar">
-            <mat-label>Email</mat-label>
+            <mat-label>Hello...</mat-label>
             <input type="email" matInput placeholder="Ex. pat@example.com">
             <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
               Please enter a valid email address
@@ -25,18 +24,17 @@
             <button matSuffix mat-button><mat-icon >search</mat-icon></button>
           </mat-form-field>
         </div>
-        <!-- ----------------------------------------------------------------- -->
 
         <div class="action-box" *ngIf="isMedium" fxLayout="row" fxLayoutAlign="center center">
-          <button mat-flat-button (click)="openMenu()">
+          <button class="action-box-btn" mat-flat-button (click)="openMenu()">
             <h4>Drops</h4>
           </button>
 
-          <button mat-flat-button (click)="openMenu()">
+          <button class="action-box-btn" mat-flat-button (click)="openMenu()">
             <h4>Stats</h4>
           </button>
 
-          <button mat-flat-button (click)="openMenu()" style="width: 130px;">
+          <button style="width: 130px;" class="action-box-btn" mat-flat-button (click)="openMenu()">
             <h4>Resources</h4>
           </button>
         </div>

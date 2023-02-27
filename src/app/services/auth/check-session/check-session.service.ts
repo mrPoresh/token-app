@@ -28,6 +28,8 @@ export class CheckSessionService extends BaseHttpService {
           this.loginStatusService.updateUserInfo({
             isLogged: LoggedStatus.logged,
             username: res.username,
+            surname: res.surname,
+            firstname: res.firstname,
             wallets: res.wallets
           });
         }),
