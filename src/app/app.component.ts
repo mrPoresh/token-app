@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
 
 import { BasePageComponent } from './components/base-components/base-page/base-page.component';
-import { loginTrx, rootTrx, signUpTrx, testTrx, menuOutlet } from './router-translation.labels';
+import { loginTrx, rootTrx, signUpTrx, testTrx, menuOutlet, walletTrx } from './router-translation.labels';
 import { LoggedStatus } from './services/auth/auth.models';
 import { CheckSessionService } from './services/auth/check-session/check-session.service';
 import { BaseHttpService } from './services/http/base-http.service';
@@ -19,7 +19,7 @@ export class AppComponent extends BasePageComponent implements OnInit {
   title = 'token-market';
 
   loginTrx = loginTrx;
-  testTrx = testTrx;
+  walletTrx = walletTrx;
 
   public isExtend = false;
   public isFull = false;

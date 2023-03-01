@@ -46,10 +46,16 @@
             </button>
   
             <ng-template #account>
-              <img src="/assets/icons/user_avatar.png" style="width: 40px; border-radius: 50%;">
+              <button mat-icon-button [matMenuTriggerFor]="menu" style="background-color: rgba(0, 0, 0, 0);">
+                <img src="/assets/icons/user_avatar.png" style="width: 24px; border-radius: 50%; object-fit: cover;">
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+              </mat-menu>
             </ng-template>
 
-            <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(testTrx)">
+            <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(walletTrx)">
               <mat-icon>account_balance_wallet</mat-icon>
             </button>
   

@@ -17,6 +17,8 @@ import { SignupStepOneComponent } from './components/auth/signup/signup-step-one
 import { SignupStepTwoComponent } from './components/auth/signup/signup-step-two/signup-step-two.component';
 import { SignupStepThreeComponent } from './components/auth/signup/signup-step-three/signup-step-three.component';
 import { LoaderComponent } from './components/base-components/loader/loader.component';
+import { WalletSlideComponent } from './components/wallet-slide/wallet-slide.component';
+import { UserSlideComponent } from './components/user-slide/user-slide.component';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { LoaderComponent } from './components/base-components/loader/loader.comp
     SignupStepTwoComponent,
     SignupStepThreeComponent,
     LoaderComponent,
+    WalletSlideComponent,
+    UserSlideComponent,
   ],
   imports: [
     BrowserModule,
