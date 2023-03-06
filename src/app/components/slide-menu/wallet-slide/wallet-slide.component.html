@@ -1,0 +1,28 @@
+<div class="wallet-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+    <mat-accordion class="wallets">
+        <mat-expansion-panel class="wallets-panel" *ngFor="let wallet of User.wallets" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{wallet.name}}</mat-panel-title>
+                <mat-panel-description>icon</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-accordion *ngIf="wallet.accounts" class="accounts">
+                <mat-expansion-panel *ngFor="let account of wallet.accounts!" hideToggle>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>{{account.acc.currency}}</mat-panel-title>
+                        <mat-panel-description>{{account.acc.balance.accountBalance}}</mat-panel-description>
+                    </mat-expansion-panel-header>
+                </mat-expansion-panel>
+
+
+            </mat-accordion>
+
+            <div style="padding-top: 16px;">
+                <button mat-flat-button color="accent">Add Account</button>
+                <button mat-flat-button color="accent">Add Deposit</button>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <button mat-flat-button color="accent">Add Wallet</button>
+</div>

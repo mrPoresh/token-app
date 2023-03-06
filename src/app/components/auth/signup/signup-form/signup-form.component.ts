@@ -31,6 +31,7 @@ export class SignupFormComponent extends BasePageComponent implements OnInit {
     firstname: new FormControl(''),
     surname: new FormControl(''),
     currency: new FormControl(''),
+    walletname: new FormControl('First Wallet')
   })
 
   @ViewChild('stepper') stepper!: MatStepper;

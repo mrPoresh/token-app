@@ -13,22 +13,25 @@ export interface UserInfo {
 }
 
 export interface Wallet {
+    name: string,
     xpub: string,
     accounts?: Account[],
-    deposits?: Deposit[]
 }
 
 export interface Account {
-    currency: string,
-    active: boolean,
-    frozen: boolean,
-    balance: {
-        accountBalance: string,
-        availableBalance: string,
+    acc: {
+        currency: string,
+        active: boolean,
+        frozen: boolean,
+        balance: {
+            accountBalance: string,
+            availableBalance: string,
+        },
+        xpub: string,
+        accountingCurrency: string,
+        id: string,
     },
-    xpub: string,
-    accountingCurrency: string,
-    id: string
+    deposits?: Deposit[]
 } 
 
 export interface Deposit {

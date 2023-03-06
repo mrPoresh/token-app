@@ -17,8 +17,9 @@ import { SignupStepOneComponent } from './components/auth/signup/signup-step-one
 import { SignupStepTwoComponent } from './components/auth/signup/signup-step-two/signup-step-two.component';
 import { SignupStepThreeComponent } from './components/auth/signup/signup-step-three/signup-step-three.component';
 import { LoaderComponent } from './components/base-components/loader/loader.component';
-import { WalletSlideComponent } from './components/wallet-slide/wallet-slide.component';
+import { WalletSlideComponent } from './components/slide-menu/wallet-slide/wallet-slide.component';
 import { UserSlideComponent } from './components/user-slide/user-slide.component';
+import { LoginStatusService } from './services/auth/login/login-status.service';
 
 
 @NgModule({
@@ -44,7 +45,9 @@ import { UserSlideComponent } from './components/user-slide/user-slide.component
     SharedMaterialModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    LoginStatusService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

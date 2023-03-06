@@ -1,0 +1,27 @@
+.wallet-wrapper {
+    height: 100%;
+    width: 100%;
+
+    .wallets {
+        width: 100%;
+
+        .mat-expansion-panel-header-description {
+            justify-content: end !important;
+            align-items: center !important;
+            margin-right: 0px !important;
+        }
+
+        .accounts {
+            width: 100%;
+        }
+    }
+}
+
+button {
+    width: 100%;
+    height: 40px !important;
+
+    margin-top: 6px;
+
+    border-radius: 15px;
+}
