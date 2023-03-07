@@ -1,20 +1,33 @@
 <div class="wallet-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
     <mat-accordion class="wallets">
-        <mat-expansion-panel class="wallets-panel" *ngFor="let wallet of User.wallets" hideToggle>
+        <mat-expansion-panel class="wallets-panel" *ngFor="let wallet of User.user!.wallets!" hideToggle>
             <mat-expansion-panel-header>
-                <mat-panel-title>{{wallet.name}}</mat-panel-title>
+                <mat-panel-title>{{wallet.wallet.name}}</mat-panel-title>
                 <mat-panel-description>icon</mat-panel-description>
             </mat-expansion-panel-header>
 
-            <mat-accordion *ngIf="wallet.accounts" class="accounts">
-                <mat-expansion-panel *ngFor="let account of wallet.accounts!" hideToggle>
+            <mat-accordion *ngIf="wallet.wallet.accounts" class="accounts">
+                <mat-expansion-panel *ngFor="let account of wallet.wallet.accounts!" hideToggle>
                     <mat-expansion-panel-header>
-                        <mat-panel-title>{{account.acc.currency}}</mat-panel-title>
-                        <mat-panel-description>{{account.acc.balance.accountBalance}}</mat-panel-description>
+                        <mat-panel-title>{{account.account.currency}}</mat-panel-title>
+                        <mat-panel-description>{{account.account.balance.accountBalance}}</mat-panel-description>
                     </mat-expansion-panel-header>
+
+                    <!-- <mat-table [dataSource]="account.account.deposits!" class="mat-elevation-z8">
+                        <ng-container matColumnDef="xpub">
+                            <th mat-header-cell *matHeaderCellDef> xpub </th>
+                            <td mat-cell *matCellDef="let element"> {{element.deposit.xpub}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="address">
+                            <th mat-header-cell *matHeaderCellDef> address </th>
+                            <td mat-cell *matCellDef="let element"> {{element.deposit.address}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </mat-table> -->    <!-- leave for wallets settings component -->
                 </mat-expansion-panel>
-
-
             </mat-accordion>
 
             <div style="padding-top: 16px;">

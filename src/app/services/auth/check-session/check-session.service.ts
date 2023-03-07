@@ -25,12 +25,10 @@ export class CheckSessionService extends BaseHttpService {
       console.log('token exist', token)
       return this.getRequest<UserInfo>(USER_INFO_SESSION, undefined, token).pipe(
         map((res) => {
+          console.log(res)
           this.loginStatusService.updateUserInfo({
             isLogged: LoggedStatus.logged,
-            username: res.username,
-            surname: res.surname,
-            firstname: res.firstname,
-            wallets: res.wallets
+            user: res.user
           });
         }),
         switchMap(() => this.loginStatusService.getLoginStatus()),

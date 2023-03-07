@@ -6,20 +6,24 @@ export enum LoggedStatus {
 
 export interface UserInfo {
     isLogged: LoggedStatus;
-    username?: string;
-    surname?: string;
-    firstname?: string;
-    wallets?: Wallet[]
+    user?: {
+        username?: string;
+        surname?: string;
+        firstname?: string;
+        wallets?: Wallet[]
+    },
 }
 
 export interface Wallet {
-    name: string,
-    xpub: string,
-    accounts?: Account[],
+    wallet: {
+        name: string,
+        xpub: string,
+        accounts?: Account[],
+    }
 }
 
 export interface Account {
-    acc: {
+    account: {
         currency: string,
         active: boolean,
         frozen: boolean,
@@ -30,15 +34,17 @@ export interface Account {
         xpub: string,
         accountingCurrency: string,
         id: string,
-    },
-    deposits?: Deposit[]
+        deposits?: Deposit[]
+    }
 } 
 
 export interface Deposit {
-    xpub: string,
-    derivationKey: number,
-    address: string,
-    currency: string,
+    deposit: {
+        xpub: string,
+        derivationKey: number,
+        address: string,
+        currency: string,
+    }
 }
 
 export interface LoginEmailResponse {

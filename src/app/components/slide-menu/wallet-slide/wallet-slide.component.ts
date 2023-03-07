@@ -12,6 +12,8 @@ import { BasePageComponent } from '../../base-components/base-page/base-page.com
 })
 export class WalletSlideComponent extends BasePageComponent implements OnInit {
 
+  public displayedColumns: string[] = ['xpub', 'address'];
+
   public User!: UserInfo;
 
   constructor(
