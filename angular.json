@@ -71,7 +71,7 @@
           "configurations": {
             "production": {
               "browserTarget": "token-market:build:production",
-              "proxyConfig": "src/proxy.conf.json"
+              "proxyConfig": "proxy.conf.json"
             },
             "development": {
               "browserTarget": "token-market:build:development",

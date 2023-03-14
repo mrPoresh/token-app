@@ -36,4 +36,8 @@ export class LoginEmailService extends BaseHttpService {
     );
   }
 
+  getCookie() {
+    return this.cookie.get("session")
+  }
+
 }

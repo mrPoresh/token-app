@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SharedMaterialModule } from './modules/shared-material.module';
@@ -20,6 +20,7 @@ import { LoaderComponent } from './components/base-components/loader/loader.comp
 import { WalletSlideComponent } from './components/slide-menu/wallet-slide/wallet-slide.component';
 import { UserSlideComponent } from './components/user-slide/user-slide.component';
 import { LoginStatusService } from './services/auth/login/login-status.service';
+import { AuthInterceptor } from './interceptors/auth-Interceptor-http.interceptor';
 
 
 @NgModule({
@@ -47,6 +48,11 @@ import { LoginStatusService } from './services/auth/login/login-status.service';
   ],
   providers: [
     LoginStatusService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

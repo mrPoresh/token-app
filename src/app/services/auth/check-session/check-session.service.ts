@@ -23,12 +23,12 @@ export class CheckSessionService extends BaseHttpService {
     const token = this.cookie.get('session');
     if (token) {
       console.log('token exist', token)
-      return this.getRequest<UserInfo>(USER_INFO_SESSION, undefined, token).pipe(
+      return this.getRequest<UserInfo>(USER_INFO_SESSION, undefined).pipe(
         map((res) => {
-          console.log(res)
+          console.log(res);
           this.loginStatusService.updateUserInfo({
             isLogged: LoggedStatus.logged,
-            user: res.user
+            user: res
           });
         }),
         switchMap(() => this.loginStatusService.getLoginStatus()),

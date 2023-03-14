@@ -15,36 +15,31 @@ export interface UserInfo {
 }
 
 export interface Wallet {
-    wallet: {
-        name: string,
-        xpub: string,
-        accounts?: Account[],
-    }
+    name: string,
+    xpub: string,
+    walletname: string,
+    accounts?: Account[],
 }
 
 export interface Account {
-    account: {
-        currency: string,
-        active: boolean,
-        frozen: boolean,
-        balance: {
-            accountBalance: string,
-            availableBalance: string,
-        },
-        xpub: string,
-        accountingCurrency: string,
-        id: string,
-        deposits?: Deposit[]
-    }
+    currency: string,
+    active: boolean,
+    frozen: boolean,
+    balance: {
+        accountBalance: string,
+        availableBalance: string,
+    },
+    xpub: string,
+    accountingCurrency: string,
+    id: string,
+    deposits?: Deposit[]
 } 
 
 export interface Deposit {
-    deposit: {
-        xpub: string,
-        derivationKey: number,
-        address: string,
-        currency: string,
-    }
+    xpub: string,
+    derivationKey: number,
+    address: string,
+    currency: string,
 }
 
 export interface LoginEmailResponse {
@@ -56,6 +51,12 @@ export interface LoginEmailResponse {
 export interface RegistrationResponse {
     data: {
         token: string,
+        mnemonic: string,
+    }
+}
+
+export interface CreateWalletResponse {
+    data: {
         mnemonic: string,
     }
 }
