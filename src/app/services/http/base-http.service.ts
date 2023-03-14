@@ -11,6 +11,7 @@ export const SIGNUP_URL: string = "/umg/signup";
 export const USER_INFO_SESSION: string = "/umg/info";
 
 export const CREATE_WALLET: string = "/wallet/addwallet"
+export const CREATE_ACCOUNT: string = "/wallet/addacc"
 
 @Injectable({
   providedIn: 'root'

@@ -29,15 +29,45 @@
                     </mat-table> -->    <!-- leave for wallets settings component -->
                 </mat-expansion-panel>
             </mat-accordion>
+        </mat-expansion-panel>
 
-            <div *ngIf="!isAddAccount else cancelAdding" style="padding-top: 16px;">
-                <button mat-flat-button color="accent" (click)="changeAddAccStatus(true)">Add Account</button>
-                <!-- <button mat-flat-button color="accent">Add Deposit</button> -->    <!-- leave for wallets settings component -->
-            </div>
+        <mat-expansion-panel *ngIf="isAddAccount" hideToggle expanded>
+            <mat-expansion-panel-header>
+                <mat-panel-title>New Account</mat-panel-title>
+                <mat-panel-description>Choose Currency and Wallet</mat-panel-description>
+            </mat-expansion-panel-header>
 
-            <ng-template #cancelAdding>
-                <button style="margin-top: 22px;" mat-flat-button color="warn" (click)="changeAddAccStatus(false)">Cancel</button>
-            </ng-template>
+            <form name="accountForm" [formGroup]="accountForm" (ngSubmit)="createAccount(accountForm)" fxLayout="column" fxLayoutAlign="start center">
+                <div style="width: 100%;" fxLayout="row" fxLayoutAlign="space-between center">
+                    <mat-form-field class="select" appearance="outline">
+                        <mat-label i18n>Account Currency</mat-label>
+                        <mat-select formControlName="currency">
+                            <mat-option *ngFor="let cur of currency" [value]="cur.value">{{cur.viewValue}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="select" appearance="outline">
+                        <mat-label i18n>Wallet</mat-label>
+                        <mat-select formControlName="xpub">
+                            <mat-option *ngFor="let xpub of xpubs" [value]="xpub.value">{{xpub.viewValue}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <button mat-flat-button color="primary" type="submit">Confirm</button>
+            </form>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel *ngIf="isAccountAdded" hideToggle expanded>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Account Added!</mat-panel-title>
+                <mat-panel-description>(0__0)</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <h3>Nice!!!</h3>
+
+            <button mat-flat-button color="accent" (click)="changeAccountAddedStatus(false)">Confirm</button>
+            
         </mat-expansion-panel>
 
         <mat-expansion-panel *ngIf="isAddWallet" hideToggle expanded>
@@ -50,9 +80,9 @@
                 <div style="width: 100%;" fxLayout="row" fxLayoutAlign="space-between center">
                     <mat-form-field class="input" appearance="outline">
                         <mat-label i18n>Wallet Name</mat-label>
-                        <input matInput formControlName="name"> <!-- [type]="hidePassword ? 'password' : 'text'" -->
+                        <input matInput formControlName="walletname"> <!-- [type]="hidePassword ? 'password' : 'text'" -->
                         <!-- <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon> -->
-                        <mat-error *ngIf="walletForm.get('name')?.hasError('required')" i18n>Please enter Wallet Name.</mat-error>
+                        <mat-error *ngIf="walletForm.get('walletname')?.hasError('required')" i18n>Please enter Wallet Name.</mat-error>
                         <!-- <mat-error *ngIf="registerForm2.get('password')?.hasError('minlength')" i18n>Your password is too short.</mat-error> -->
                         <!-- <mat-error *ngIf="registerForm1.get('password')?.hasError('pattern')">
                             {{registerForm1.get('password').errors.pattern.msg}}
@@ -73,8 +103,24 @@
                 <button mat-flat-button color="primary" type="submit">Confirm</button>
             </form>
         </mat-expansion-panel>
+
+        <mat-expansion-panel *ngIf="isWalletAdded" hideToggle expanded>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Wallet Added!</mat-panel-title>
+                <mat-panel-description>Remember Mnemonic!</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <h3>{{mnemonic}}</h3>
+
+            <button mat-flat-button color="accent" (click)="changeIsWalletAddedStatus(false)">Confirm</button>
+            
+        </mat-expansion-panel>
     </mat-accordion>
 
-    <button *ngIf="!isAddWallet" mat-flat-button color="accent" (click)="changeAddWalletStatus(true)">Add Wallet</button>
-    <button *ngIf="isAddWallet" mat-flat-button color="warn" (click)="changeAddWalletStatus(false)">Cancel</button>
+    <div style="width: 100%;">
+        <button *ngIf="!isAddAccount" mat-flat-button color="accent" (click)="changeAddAccStatus(true)">Add Account</button>
+        <button *ngIf="isAddAccount" mat-flat-button color="warn" (click)="changeAddAccStatus(false)">Cancel</button>
+        <button *ngIf="!isAddWallet" mat-flat-button color="accent" (click)="changeAddWalletStatus(true)">Add Wallet</button>
+        <button *ngIf="isAddWallet" mat-flat-button color="warn" (click)="changeAddWalletStatus(false)">Cancel</button>
+    </div>
 </div>

@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { map } from 'rxjs';
 import { CreateWalletResponse, UserInfo } from '../auth/auth.models';
 import { CheckSessionService } from '../auth/check-session/check-session.service';
-import { BaseHttpService, CREATE_WALLET } from './base-http.service';
+import { BaseHttpService, CREATE_ACCOUNT, CREATE_WALLET } from './base-http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,10 @@ export class BaseWalletService extends BaseHttpService {
         return res.data.mnemonic
       })
     );
+  }
+
+  public createAccount(formGroup: FormGroup) {    // add generic type
+    return this.postRequest(CREATE_ACCOUNT, formGroup)
   }
 
 }
