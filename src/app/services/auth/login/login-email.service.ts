@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, map, Observable, switchMap } from 'rxjs';
 
-import { BaseHttpService, LOGIN_EMAIL_URL } from '../../http/base-http.service';
+import { BaseHttpService, LOGIN_EMAIL_URL, LOGOUT_USER } from '../../http/base-http.service';
 import { LoginEmailResponse, UserInfo } from '../auth.models';
 import { CheckSessionService } from '../check-session/check-session.service';
 import { LoginStatusService } from './login-status.service';
@@ -18,6 +18,7 @@ export class LoginEmailService extends BaseHttpService {
     http: HttpClient, 
     cookie: CookieService,
     private checkSessionService: CheckSessionService,
+    private formBuilder: FormBuilder,
   ) { 
     super(http, cookie) 
   }
@@ -38,6 +39,13 @@ export class LoginEmailService extends BaseHttpService {
 
   getCookie() {
     return this.cookie.get("session")
+  }
+
+  logOut() {  /////////////
+    let token = this.cookie.get("session");
+    this.cookie.delete("session");
+    let tokenForm = this.formBuilder.group({token: token});
+    return this.postRequest(LOGOUT_USER, tokenForm)
   }
 
 }

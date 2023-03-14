@@ -18,7 +18,7 @@ import { SignupStepTwoComponent } from './components/auth/signup/signup-step-two
 import { SignupStepThreeComponent } from './components/auth/signup/signup-step-three/signup-step-three.component';
 import { LoaderComponent } from './components/base-components/loader/loader.component';
 import { WalletSlideComponent } from './components/slide-menu/wallet-slide/wallet-slide.component';
-import { UserSlideComponent } from './components/user-slide/user-slide.component';
+import { UserSlideComponent } from './components/slide-menu/user-slide/user-slide.component';
 import { LoginStatusService } from './services/auth/login/login-status.service';
 import { AuthInterceptor } from './interceptors/auth-Interceptor-http.interceptor';
 

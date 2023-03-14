@@ -7,7 +7,7 @@ import { FrontPageComponent } from './components/front-page/front-page.component
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupFormComponent } from './components/auth/signup/signup-form/signup-form.component';
 import { WalletSlideComponent } from './components/slide-menu/wallet-slide/wallet-slide.component';
-import { UserSlideComponent } from './components/user-slide/user-slide.component';
+import { UserSlideComponent } from './components/slide-menu/user-slide/user-slide.component';
 import { AuthGuard } from './utils/guards/auth.guard';
 
 
