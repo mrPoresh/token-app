@@ -19,7 +19,7 @@ export class UserSlideComponent extends BasePageComponent implements OnInit {
   constructor(
     private loginStatusService: LoginStatusService,
     private checkSessionService: CheckSessionService,
-    //private menuService: SlideMenuBtnService,
+    private menuService: SlideMenuBtnService,
     private userHttpServeice: LoginEmailService
   ) {
     super();
@@ -32,10 +32,10 @@ export class UserSlideComponent extends BasePageComponent implements OnInit {
   }
 
   logOut() {
-    //this.menuService.updateMenuStatus(false);
-    this.userHttpServeice.logOut().pipe(
+    this.menuService.updateMenuStatus(false);
+    /* this.userHttpServeice.logOut().pipe(
       switchMap((res) => this.checkSessionService.requestCheckSession())
-    )
+    ) */
   }
 
 }

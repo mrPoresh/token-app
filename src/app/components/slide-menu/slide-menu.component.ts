@@ -10,9 +10,6 @@ import { BasePageComponent } from '../base-components/base-page/base-page.compon
 })
 export class SlideMenuComponent extends BasePageComponent implements OnInit {
 
-  @Output() status = new EventEmitter<boolean>();
-  /* @Input() routeTrx: string = 'login'; */
-
   constructor(
     private router: Router,
     private menuService: SlideMenuBtnService
@@ -20,24 +17,10 @@ export class SlideMenuComponent extends BasePageComponent implements OnInit {
     super()
   }
 
-  ngOnInit() {
-/*     console.log('path', this.routeTrx);
-    this.navigate(this.routeTrx); */
-  }
-
-  ngOnChanges() {
-/*     console.log('path', this.routeTrx);
-    this.navigate(this.routeTrx); */
-  }
+  ngOnInit() {}
 
   closeMenu() {
     this.menuService.updateMenuStatus(false);
-    
-    this.status.emit(false);
-  }
-
-  navigate(url: string) {
-/*     this.router.navigate([{ outlets: { 'slide-menu' : [url] }}]); */
   }
 
 }

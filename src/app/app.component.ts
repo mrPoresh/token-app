@@ -54,7 +54,12 @@ export class AppComponent extends BasePageComponent implements OnInit {
     this.checkHeader();
     this.menuService.getMenuStatus().pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
       if (res) {
-        this.toggleMenu(res);
+        this.sidenav.open();
+      } else {
+        if (this.sidenav) {
+          this.sidenav.close();
+        }
+        this.router.navigate([{ outlets: { [menuOutlet] : null }}], { relativeTo: this.activatedRoute.parent });
       }
     });
     
@@ -75,16 +80,6 @@ export class AppComponent extends BasePageComponent implements OnInit {
 
   closeMenu() {
     this.menuService.updateMenuStatus(false);
-    this.router.navigate([{ outlets: { [menuOutlet] : null }}], { relativeTo: this.activatedRoute.parent });
-  }
-
-  toggleMenu(status: boolean) {
-    if (status) {
-      this.sidenav.open();
-    } else {
-      this.sidenav.close();
-      this.router.navigate([{ outlets: { [menuOutlet] : null }}], { relativeTo: this.activatedRoute.parent });
-    }
   }
 
   navigate(url: string) {
@@ -112,6 +107,7 @@ export class AppComponent extends BasePageComponent implements OnInit {
     }
   }
   /* --------------------------------------------------------------------------------------------- */
+
   checkHeader() {
     let smallTrigger = 700;
     let mediumTrigger = 1100;
@@ -126,6 +122,7 @@ export class AppComponent extends BasePageComponent implements OnInit {
       this.isMedium = false;
     }
   }
+
   /* --------------------------------------------------------------------------------------------- */
 
 }

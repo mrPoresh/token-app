@@ -1,7 +1,7 @@
 <div class="full-wrapper" fxLayout="column" fxLayoutAlign="start center">
   <mat-sidenav-container (backdropClick)="closeMenu()">
     <mat-sidenav #sidenav>
-      <app-slide-menu  (status)="toggleMenu($event)"></app-slide-menu>  <!-- [routeTrx]="routeTrx" -->
+      <app-slide-menu></app-slide-menu>   <!-- (status)="toggleMenu($event)" [routeTrx]="routeTrx" -->
     </mat-sidenav>
 
     <mat-sidenav-content>
