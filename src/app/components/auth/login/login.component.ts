@@ -6,6 +6,8 @@ import { menuOutlet, signUpTrx } from 'src/app/router-translation.labels';
 import { UserInfo } from 'src/app/services/auth/auth.models';
 
 import { LoginEmailService } from 'src/app/services/auth/login/login-email.service';
+import { LoaderService } from 'src/app/utils/loader.service';
+import { SlideMenuBtnService } from 'src/app/utils/slide-menu-btn.service';
 import { BasePageComponent } from '../../base-components/base-page/base-page.component';
 
 @Component({
@@ -31,6 +33,8 @@ export class LoginComponent extends BasePageComponent implements OnInit {
     public formBuilder: FormBuilder,
     private router: Router,
     protected loginService: LoginEmailService,
+    private menuService: SlideMenuBtnService,
+    private loader: LoaderService,
   ) { super() }
 
   ngOnInit() {
@@ -38,8 +42,10 @@ export class LoginComponent extends BasePageComponent implements OnInit {
   }
 
   onSubmit(loginForm: FormGroup) {
-    this.loginService.requestLoginUser(loginForm).subscribe((resp) => {
-      console.log('result', resp)
+    this.loader.show({status: true});
+    this.loginService.requestLoginUser(loginForm).subscribe({
+      next: (res) => { console.log(res); this.menuService.updateMenuStatus(false); this.loader.hide() },
+      error: (err) => { console.log(err); this.loader.hide()}
     });
   }
 

@@ -21,6 +21,7 @@ export class CheckSessionService extends BaseHttpService {
 
   public requestCheckSession () {
     const token = this.cookie.get('session');
+    console.log('req for roken')
     if (token) {
       console.log('token exist', token)
       return this.getRequest<UserInfo>(USER_INFO_SESSION, undefined).pipe(

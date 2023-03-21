@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
 
 import { BasePageComponent } from './components/base-components/base-page/base-page.component';
-import { loginTrx, rootTrx, signUpTrx, testTrx, menuOutlet, walletTrx, userTrx } from './router-translation.labels';
+import { loginTrx, signUpTrx, menuOutlet, walletTrx, userTrx } from './router-translation.labels';
 import { LoggedStatus } from './services/auth/auth.models';
 import { CheckSessionService } from './services/auth/check-session/check-session.service';
 import { BaseHttpService } from './services/http/base-http.service';

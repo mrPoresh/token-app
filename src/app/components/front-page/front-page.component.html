@@ -1,3 +1,18 @@
-<div class="body-f" style="height: 130vh; width: 100%; background-color: rgba(2, 2, 2, 0.3);">
-    <p style="padding-top: 100px; text-align: center;">front-page works!</p>
+<div class="front-wrapper" fxLayout="column" fxLayoutAlign="start center">
+    <div class="head" fxLayout="column" fxLayoutAlign="start center">
+        <div class="btn-nav" fxLayout="row" fxLayoutAlign="start center">
+            <button mat-flat-button (click)="changeCategory(PromotedNFTs.all)">All</button>
+            <button mat-flat-button (click)="changeCategory(PromotedNFTs.art)">Art</button>
+            <button mat-flat-button (click)="changeCategory(PromotedNFTs.gaming)">Gaming</button>
+            <button mat-flat-button (click)="changeCategory(PromotedNFTs.photo)">Photo</button>
+        </div>
+
+        <app-promoted style="width: 100%;" [category]="category"></app-promoted>
+    </div>
+
+    <app-top-list style="width: 100%;"></app-top-list>
+
+    <div class="list">
+
+    </div>
 </div>

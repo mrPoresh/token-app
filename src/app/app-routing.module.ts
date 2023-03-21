@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { menuOutlet, loginTrx, rootTrx, signUpTrx, testTrx, walletTrx, userTrx } from './router-translation.labels';
+import { menuOutlet, loginTrx, signUpTrx, walletTrx, userTrx, frontRootTrx, frontArtTrx, frontGamingTrx, frontPhotoTrx } from './router-translation.labels';
 
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -13,7 +13,7 @@ import { AuthGuard } from './utils/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: rootTrx, component: FrontPageComponent
+    path: frontRootTrx, component: FrontPageComponent
   },
   {
     path: loginTrx, outlet: menuOutlet, component: LoginComponent

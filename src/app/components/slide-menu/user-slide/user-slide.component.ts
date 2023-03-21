@@ -33,9 +33,9 @@ export class UserSlideComponent extends BasePageComponent implements OnInit {
 
   logOut() {
     this.menuService.updateMenuStatus(false);
-    /* this.userHttpServeice.logOut().pipe(
+    this.userHttpServeice.logOut().pipe(
       switchMap((res) => this.checkSessionService.requestCheckSession())
-    ) */
+    );
   }
 
 }

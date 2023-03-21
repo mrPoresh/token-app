@@ -21,6 +21,8 @@ import { WalletSlideComponent } from './components/slide-menu/wallet-slide/walle
 import { UserSlideComponent } from './components/slide-menu/user-slide/user-slide.component';
 import { LoginStatusService } from './services/auth/login/login-status.service';
 import { AuthInterceptor } from './interceptors/auth-Interceptor-http.interceptor';
+import { PromotedComponent } from './components/front-page/promoted/promoted.component';
+import { TopListComponent } from './components/front-page/top-list/top-list.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { AuthInterceptor } from './interceptors/auth-Interceptor-http.intercepto
     LoaderComponent,
     WalletSlideComponent,
     UserSlideComponent,
+    PromotedComponent,
+    TopListComponent,
   ],
   imports: [
     BrowserModule,

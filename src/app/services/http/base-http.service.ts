@@ -11,8 +11,10 @@ export const SIGNUP_URL: string = "/umg/signup";
 export const USER_INFO_SESSION: string = "/umg/info";
 export const LOGOUT_USER: string = "/umg/logout";
 
-export const CREATE_WALLET: string = "/wallet/addwallet"
-export const CREATE_ACCOUNT: string = "/wallet/addacc"
+export const CREATE_WALLET: string = "/wallet/addwallet";
+export const CREATE_ACCOUNT: string = "/wallet/addacc";
+
+export const GET_FRONT_LIST: string = '/nfts/getfrontpagelists';
 
 @Injectable({
   providedIn: 'root'
