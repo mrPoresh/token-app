@@ -1,0 +1,38 @@
+<mat-toolbar class="header-wrapper" [ngClass]="(!isExtend) ? 'default': 'extend'">
+    <div class="logo">
+        <img src="/assets/icons/large_logo.png" style="object-fit: cover; height: 50px; padding-right: 20px;">
+        <h2 style="margin: 0px; text-align: center; color: white;">TokensMarket</h2>
+    </div>
+
+    <div *ngIf="isFull" class="search">
+        <mat-form-field >
+            <mat-label>Hello...</mat-label>
+            <input type="email" matInput placeholder="Ex. pat@example.com">
+            <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+        </mat-form-field>
+    </div>
+
+    <div class="user-action">
+        <button *ngIf="!isLogged else account" mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(loginTrx)">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    
+        <ng-template #account>
+        <button mat-icon-button [matMenuTriggerFor]="menu" style="background-color: rgba(0, 0, 0, 0);">
+            <img src="/assets/icons/user_avatar.png" style="width: 24px; border-radius: 50%; object-fit: cover;">
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openMenu()" (click)="navigateSlideMenu(userTrx)">Compact Profile</button>
+            <button mat-menu-item>Full Profile</button>
+        </mat-menu>
+        </ng-template>
+
+        <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(walletTrx)">
+            <mat-icon>account_balance_wallet</mat-icon>
+        </button>
+
+        <button mat-icon-button>
+            <mat-icon>shopping_cart</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>

@@ -14,14 +14,7 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
 
   public PromotedNFTs = PromotedNFTs; // ?
   public category = PromotedNFTs.all;
-
-  /* private dataForm = this.formBulder.group({
-    addresses: [
-      TopList.addresses
-    ],
-    chain: TopList.chain,
-    pageSize: TopList.pageSize,
-  }); */
+  public nftLists: any;  //
 
   private dataForm = this.formBulder.group({
     addresses: new FormControl(TopList.addresses),
@@ -39,9 +32,10 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.getFrontPageLists(this.dataForm).pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
-      console.log(res)
-    });
+/*     this.dataService.getFrontPageLists(this.dataForm).pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+      console.log(res);
+      this.nftLists = res;
+    }); */
   }
 
   changeCategory(category: any) {
@@ -73,14 +67,14 @@ export const TopList = {
 }
 
 export const PromotedNFTs = {
-  all: {
+  art: {
     image: "/assets/promoted/all.png",
     name: 'Life in Our Minds',
     address: '0x6144226e04dce7f9d9cc468b98d8667648613ed9',
     owner: 'Cool Boy',
     chain: 'ethereum'
   },
-  art: {
+  all: {
     image: "/assets/promoted/art.png",
     name: 'MidnightBreeze',
     address: '0xd9c036e9eef725e5aca4a22239a23feb47c3f05d',

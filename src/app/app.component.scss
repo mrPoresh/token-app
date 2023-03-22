@@ -25,117 +25,12 @@
 
             mat-sidenav-content {
                 width: 100%;
-                
-                .header {
-                    width: 100%;
-                    height: 75px;
-        
-                    padding-left: 20px;
-                    padding-right: 20px;
-
-                    position: fixed;
-
-                    display: flex;
-                    //justify-content: space-between;
-        
-                    //box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
-
-                    .mat-icon {
-                        color: white
-                    }
-
-                    h2 {
-                        color: white;
-                        margin: 0;
-                    }
-
-                    h4 {
-                        color: white;
-                        margin: 0;
-                    }
-
-                    &.default {
-                        background-color: rgba(0, 0, 0, 0);
-                        //box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.125);
-
-                        .action-box-btn {
-                            background-color: rgba(0, 0, 0, 0);
-                            color: white;
-                        }
-
-                    }
-
-                    &.extend { 
-                        background-color: #3c71ce;
-                        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
-
-                        .action-box-btn {
-                            background-color: #3c71ce ; 
-                            color: white;
-                        }
-                    }
-                    
-                    .logo-box {
-                        text-align: center;
-                    }
-
-                    .search-box {
-                        flex-grow: 2;
-
-                        .search-bar {
-                            width: 90%;
-                            max-width: 800px;
-                            padding-top: 20px;
-                        }
-                    }
-        
-                    .icon-box {
-                        //justify-self: right;
-
-                        .mat-icon-button {
-                            margin: 10px;
-
-                            .mat-icon {
-                                //margin: 10px;
-                                font-size: 28px;
-                                width: 30px;
-                                object-fit: cover;
-                            }
-                        }
-                    }  
-
-                    .action-box {
-                        padding-left: 20px;
-                        padding-right: 20px;
-
-                        .action-box-btn {
-                            width: 100px;
-                        }
-                    }
-                }
+            
             }
         }
     }
 }
 
-/* ::ng-deep .mat-form-field-outline-start {    how to 
-    border-radius: 20px !important;
-}
-  
-::ng-deep .mat-form-field-outline-end {
-    border-radius: 20px !important;
-} */
-
-/* .mat-drawer-backdrop mat-drawer-shown {
-    background-color: rgba(0, 0, 0, 0) !important;
-} */
-
-@media (touch-action: 50px) {
-    .header {
-        //background-color: mat-color($mat-grey, A200);
-        background-color: #3c71ce;
-    }
-}
 
 @media (min-width: 1200px) {
     mat-sidenav {
@@ -172,8 +67,4 @@
         
     }
 
-    .mat-icon-button {
-        margin: 0px !important;
-
-    }
 }

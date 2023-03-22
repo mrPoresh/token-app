@@ -12,7 +12,22 @@
 
     <app-top-list style="width: 100%;"></app-top-list>
 
-    <div class="list">
+<!--     <div *ngIf="nftLists" class="list" fxLayout="column" fxLayoutAlign="start center">
+        <div fxLayout="row wrap" fxLayoutGap="10px grid" *ngFor="let _category of nftLists.data">
+            <div fxFlex.xl="20%" fxFlex.lg="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let item of _category | keyvalue">
+                <app-card [data]="item.value"></app-card>
+            </div>
+        </div>
+    </div> -->
 
-    </div>
+    <!-- <div *ngIf="nftLists" class="list" fxLayout="column" fxLayoutAlign="start center">
+        <div style="width: 100%;" *ngFor="let _category of nftLists.data">
+            <div style="width: 100%;" fxLayout="row wrap" fxLayoutGap="10px grid" *ngFor="let item of _category | keyvalue">
+
+                <div style="width: 100%;" fxFlex.xl="20%" fxFlex.lg="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let nft of item.value! | keyvalue">
+                    <app-card style="width: 100%;" [data]="nft.value[0]"></app-card>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </div>

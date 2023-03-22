@@ -1,87 +1,13 @@
 <div class="full-wrapper" fxLayout="column" fxLayoutAlign="start center">
   <mat-sidenav-container (backdropClick)="closeMenu()">
     <mat-sidenav #sidenav>
-      <app-slide-menu></app-slide-menu>   <!-- (status)="toggleMenu($event)" [routeTrx]="routeTrx" -->
+      <app-slide-menu></app-slide-menu>
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <mat-toolbar class="header" [ngClass]="(!isExtend) ? 'default': 'extend'" fxLayout="row" fxLayoutAlign="space-between center"> <!-- fxLayout="row" fxLayoutAlign="space-between center" -->
-        <div class="logo" fxLayout="row" fxLayoutAlign="start center">
-          <img src="/assets/icons/large_logo.png" style="object-fit: cover; height: 50px; padding-right: 20px;">
-          <h2 >TokensMarket</h2>
-        </div>
-
-        <div class="search-box" *ngIf="isFull" fxLayout="row" fxLayoutAlign="center center">
-          <mat-form-field class="search-bar">
-            <mat-label>Hello...</mat-label>
-            <input type="email" matInput placeholder="Ex. pat@example.com">
-            <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-              Please enter a valid email address
-            </mat-error> -->
-            <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
-              Email is <strong>required</strong>
-            </mat-error> -->
-            <button matSuffix mat-button><mat-icon >search</mat-icon></button>
-          </mat-form-field>
-        </div>
-
-        <div class="action-box" *ngIf="isMedium" fxLayout="row" fxLayoutAlign="center center">
-          <button class="action-box-btn" mat-flat-button (click)="openMenu()">
-            <h4>Drops</h4>
-          </button>
-
-          <button class="action-box-btn" mat-flat-button (click)="openMenu()">
-            <h4>Stats</h4>
-          </button>
-
-          <button style="width: 130px;" class="action-box-btn" mat-flat-button (click)="openMenu()">
-            <h4>Resources</h4>
-          </button>
-        </div>
-    
-        <div class="icon-box" fxLayout="row" fxLayoutAlign="center center"> 
-          <div *ngIf="isFull else mobile" fxLayout="row" fxLayoutAlign="space-between center">
-            <button *ngIf="!isLogged else account" mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(loginTrx)">  <!-- (click)="navigate(loginTrx)" -->
-              <mat-icon>account_circle</mat-icon>
-            </button>
-  
-            <ng-template #account>
-              <button mat-icon-button [matMenuTriggerFor]="menu" style="background-color: rgba(0, 0, 0, 0);">
-                <img src="/assets/icons/user_avatar.png" style="width: 24px; border-radius: 50%; object-fit: cover;">
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="openMenu()" (click)="navigateSlideMenu(userTrx)">Compact Profile</button>
-                <button mat-menu-item>Full Profile</button>
-              </mat-menu>
-            </ng-template>
-
-            <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(walletTrx)">
-              <mat-icon>account_balance_wallet</mat-icon>
-            </button>
-  
-            <button mat-icon-button (click)="openMenu()">
-              <mat-icon>shopping_cart</mat-icon>
-            </button>
-          </div>
-
-          <ng-template #mobile>
-            <button mat-icon-button (click)="openMenu()">
-              <mat-icon>search</mat-icon>
-            </button>
-
-            <button mat-icon-button (click)="openMenu()">
-              <mat-icon>shopping_cart</mat-icon>
-            </button>
-  
-            <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(loginTrx)">
-              <mat-icon>menu</mat-icon>
-            </button>
-          </ng-template>
-        </div>  
-      </mat-toolbar>
+      <app-header></app-header>
 
       <router-outlet></router-outlet>
-
     </mat-sidenav-content>
   </mat-sidenav-container>
 

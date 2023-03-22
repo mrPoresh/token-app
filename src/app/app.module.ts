@@ -23,6 +23,8 @@ import { LoginStatusService } from './services/auth/login/login-status.service';
 import { AuthInterceptor } from './interceptors/auth-Interceptor-http.interceptor';
 import { PromotedComponent } from './components/front-page/promoted/promoted.component';
 import { TopListComponent } from './components/front-page/top-list/top-list.component';
+import { CardComponent } from './components/base-components/card/card.component';
+import { HeaderComponent } from './components/base-components/header/header.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { TopListComponent } from './components/front-page/top-list/top-list.comp
     UserSlideComponent,
     PromotedComponent,
     TopListComponent,
+    CardComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
