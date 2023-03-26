@@ -1,19 +1,20 @@
 <div class="front-wrapper" fxLayout="column" fxLayoutAlign="start center">
-    <div class="head" fxLayout="column" fxLayoutAlign="start center">
-        <div class="btn-nav" fxLayout="row" fxLayoutAlign="start center">
-            <button mat-flat-button (click)="changeCategory(PromotedNFTs.all)">All</button>
-            <button mat-flat-button (click)="changeCategory(PromotedNFTs.art)">Art</button>
-            <button mat-flat-button (click)="changeCategory(PromotedNFTs.gaming)">Gaming</button>
-            <button mat-flat-button (click)="changeCategory(PromotedNFTs.photo)">Photo</button>
+    <div class="head-wrapper">
+        <div class="head" fxLayout="column" fxLayoutAlign="start center">
+            <div class="btn-nav" fxLayout="row" fxLayoutAlign="start center">
+                <button mat-flat-button (click)="changeCategory(PromotedNFTs.all)">All</button>
+                <button mat-flat-button (click)="changeCategory(PromotedNFTs.art)">Art</button>
+                <button mat-flat-button (click)="changeCategory(PromotedNFTs.gaming)">Gaming</button>
+                <button mat-flat-button (click)="changeCategory(PromotedNFTs.photo)">Photo</button>
+            </div>
+    
+            <app-promoted *ngIf="isExtend" style="width: 100%;" [category]="category"></app-promoted>
         </div>
-
-        <app-promoted style="width: 100%;" [category]="category"></app-promoted>
     </div>
 
     <app-top-list style="width: 100%;"></app-top-list>
-
 <!--     <div *ngIf="nftLists" class="list" fxLayout="column" fxLayoutAlign="start center">
-        <div fxLayout="row wrap" fxLayoutGap="10px grid" *ngFor="let _category of nftLists.data">
+        <div fxLayout="row wrap" fxLayoutGap="10px grid" *ngFor="let _category of data_set.data">
             <div fxFlex.xl="20%" fxFlex.lg="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let item of _category | keyvalue">
                 <app-card [data]="item.value"></app-card>
             </div>
@@ -30,4 +31,9 @@
             </div>
         </div>
     </div> -->
+    <div *ngIf="data_set" style="width: 100%;">
+        <div class="list" *ngFor="let category of data_set.data">
+            <app-card-list [category]="category" style="width: 100%;"></app-card-list>
+        </div>
+    </div>
 </div>

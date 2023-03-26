@@ -25,6 +25,7 @@ import { PromotedComponent } from './components/front-page/promoted/promoted.com
 import { TopListComponent } from './components/front-page/top-list/top-list.component';
 import { CardComponent } from './components/base-components/card/card.component';
 import { HeaderComponent } from './components/base-components/header/header.component';
+import { CardListComponent } from './components/base-components/card-list/card-list.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { HeaderComponent } from './components/base-components/header/header.comp
     TopListComponent,
     CardComponent,
     HeaderComponent,
+    CardListComponent,
   ],
   imports: [
     BrowserModule,

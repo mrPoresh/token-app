@@ -18,6 +18,6 @@ export class DataNftService extends BaseHttpService {
 
   public getFrontPageLists(formGroup: FormGroup) {
     console.log(formGroup.value)
-    return this.postRequest(GET_FRONT_LIST, formGroup)
+    return this.postRequest<any>(GET_FRONT_LIST, formGroup)
   }
 }

@@ -21,7 +21,7 @@
     }
 
     .search {
-        padding-top: 20px;
+        padding-top: 25px;
         flex-grow: 2;
     }
 
@@ -48,7 +48,31 @@
 
 mat-form-field {
     width: 100%;
+
+    mat-icon {
+        color: white;
+    }
 }
 
+::ng-deep mat-form-field {
+    .mdc-text-field {
+        border-radius: 15px !important;
+    }
 
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+        background-color: rgba(0, 0, 0, 0);
+    }
 
+    .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+        color: white;
+        font-weight: 500;
+    }
+
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+        border-bottom-color: white;
+    }
+
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+        border-bottom-color: white;
+    }
+}

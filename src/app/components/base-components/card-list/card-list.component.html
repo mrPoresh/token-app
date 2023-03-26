@@ -1,0 +1,8 @@
+<div class="card-list-warapper" *ngFor="let _category of category | keyvalue">
+    <h2>{{_category?.key}}</h2>
+    <div class="list">
+        <div *ngFor="let item of _category?.value" fxFlex.xl="16%" fxFlex.lg="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%">  
+            <app-card [item]="item"></app-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+.card-list-warapper {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    //flex-wrap: nowrap;
+    justify-content: flex-start;
+
+    .list {
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        //gap: 5px;
+        
+    }
+
+    /* .list>* {
+        flex: 0 0 20%;
+    } */
+}

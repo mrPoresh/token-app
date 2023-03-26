@@ -1,3 +1,5 @@
-<mat-card *ngIf="data.metadata" class="mat-elevation-z4" (click)="onClick(data)">
-    <img mat-card-image src="{{data.metadata.image}}">
+<mat-card  class="mat-elevation-z4">    <!-- *ngIf="data.metadata" (click)="onClick(data)"-->
+    <mat-card-content>
+        <img *ngIf="item[0].metadata" src="{{item[0].metadata.image}}">
+    </mat-card-content>
 </mat-card>
