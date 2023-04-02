@@ -28,7 +28,45 @@
                 }
             }
         }
-    }    
+    }
+
+    mat-tab-group {
+        width: calc(100% - 60px);
+        padding-left: 30px;
+        padding-right: 30px;
+
+        .grid-container {
+            width: 100%;
+            min-width: 500px;
+
+            max-height: 300px;  // for 3 x 2 , 500 for top 10
+
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+
+            .grid-btn-container {
+                width: 50%;
+                height: 100px;
+
+                .grid-btn {
+                    height: 100%;
+                    width: 100%;
+
+                    .btn-space {
+                        width: 100% !important;
+                        padding-left: 7.5%;
+                        padding-right: 7.5%;
+
+                        .space {
+                            width: 10%;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
 
     .list {
         width: 100%;
@@ -41,4 +79,9 @@
         align-items: stretch;
         gap: 10px 10px;
     }
+}
+
+.mdc-button .mdc-button__label {
+    position: relative;
+    width: 100% !important;
 }

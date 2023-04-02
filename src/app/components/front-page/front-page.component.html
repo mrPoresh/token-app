@@ -12,7 +12,35 @@
         </div>
     </div>
 
-    <app-top-list style="width: 100%;"></app-top-list>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <div *ngFor="let tab of tabSet | keyvalue">
+            <mat-tab label="{{tab.key}}"> 
+                <div *ngFor="let chain of tab.value! | keyvalue">
+                    <div class="grid-container" cols="2" *ngIf="choosedToken == chain.key">
+                        <div class="grid-btn-container" *ngFor="let item of chain.value!; let i = index">
+                            <button mat-flat-button class="grid-btn">
+                                <div class="btn-space" fxLayout="row" fxLayoutAlign="start center">
+                                    <span>{{i + 1}}</span>
+                                    <span class="space"></span>
+                                    <img src="{{item.metadata.image}}" style="max-height: 70px; object-fit: cover;">
+                                    <span class="space"></span>
+                                    <span>{{item.name}}</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>    
+            </mat-tab>
+        </div>
+    </mat-tab-group>
+
+    <div *ngIf="data_set" style="width: 100%;">
+        <div class="list" *ngFor="let category of data_set.data">
+            <app-card-list [category]="category" style="width: 100%;"></app-card-list>
+        </div>
+    </div>
+</div>
+
 <!--     <div *ngIf="nftLists" class="list" fxLayout="column" fxLayoutAlign="start center">
         <div fxLayout="row wrap" fxLayoutGap="10px grid" *ngFor="let _category of data_set.data">
             <div fxFlex.xl="20%" fxFlex.lg="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let item of _category | keyvalue">
@@ -31,9 +59,3 @@
             </div>
         </div>
     </div> -->
-    <div *ngIf="data_set" style="width: 100%;">
-        <div class="list" *ngFor="let category of data_set.data">
-            <app-card-list [category]="category" style="width: 100%;"></app-card-list>
-        </div>
-    </div>
-</div>

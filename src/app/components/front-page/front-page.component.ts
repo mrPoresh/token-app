@@ -22,13 +22,11 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
   public PromotedNFTs = PromotedNFTs; // ?
   public category = PromotedNFTs.all;
   public data_set!: ForntDataResponce;  //
-  public isExtend = true;
 
-  private dataForm = this.formBulder.group({
-    addresses: new FormControl(TopList.addresses),
-    chain: new FormControl(TopList.chain),
-    pageSize: new FormControl(TopList.pageSize),
-  });
+  public choosedToken = 'ethereum';
+  public listsSet: any = undefined;
+  public tabSet: any = undefined;
+  public isExtend = true;
 
   constructor(
     private router: Router,
@@ -46,36 +44,22 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
       this.isExtend = false;
     }
 
-    this.dataService.getFrontPageLists(this.dataForm).pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
-      console.log(res);
-      this.data_set = res;
-      console.log("data set",this.data_set);
+    this.dataService.getFrontPageLists().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.tabSet = res.data.tabs;
+      console.log(this.tabSet);
       this.loader.hide();
     });
+    
+  }
+
+  changeTokenTab() {
+
   }
 
   changeCategory(category: any) {
     this.category = category;
   }
 
-}
-
-export const TopList = {
-  addresses: [
-    { topAll: ['0xed5af388653567af2f388e6224dc7c4b3241c544', '0xed5af388653567af2f388e6224dc7c4b3241c544', 
-      '0x23581767a106ae21c074b2276d25e5c3e136a68b', '0xed5af388653567af2f388e6224dc7c4b3241c544',
-      '0x306b1ea3ecdf94ab739f1910bbda052ed4a9f949', '0x1a92f7381b9f03921564a437210bb9396471050c',
-    ]},
-    { topArt: ['0xed5af388653567af2f388e6224dc7c4b3241c544', '0xed5af388653567af2f388e6224dc7c4b3241c544', 
-      '0x23581767a106ae21c074b2276d25e5c3e136a68b', '0xed5af388653567af2f388e6224dc7c4b3241c544',
-      '0x306b1ea3ecdf94ab739f1910bbda052ed4a9f949', '0x1a92f7381b9f03921564a437210bb9396471050c',
-    ]},
-    // { topArt: []},
-    // { topGaming: []},
-    // { topPhoto: []},
-  ],
-  chain: 'ethereum',
-  pageSize: '1'
 }
 
 export const PromotedNFTs = {

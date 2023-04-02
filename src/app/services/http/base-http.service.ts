@@ -14,7 +14,7 @@ export const LOGOUT_USER: string = "/umg/logout";
 export const CREATE_WALLET: string = "/wallet/addwallet";
 export const CREATE_ACCOUNT: string = "/wallet/addacc";
 
-export const GET_FRONT_LIST: string = '/nfts/getfrontpagelists';
+export const GET_FRONT_LIST: string = '/nfts/getfrontpagedata';
 
 @Injectable({
   providedIn: 'root'
