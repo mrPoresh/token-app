@@ -26,6 +26,9 @@ import { TopListComponent } from './components/front-page/top-list/top-list.comp
 import { CardComponent } from './components/base-components/card/card.component';
 import { HeaderComponent } from './components/base-components/header/header.component';
 import { CardListComponent } from './components/base-components/card-list/card-list.component';
+import { CheckSessionService } from './services/auth/check-session/check-session.service';
+import { BaseWalletProviderService } from './services/web3-providers/base-wallet-provider.service';
+import { LoginWalletProviderService } from './services/web3-providers/login-wallet-provider.service';
 
 
 @NgModule({
@@ -62,7 +65,10 @@ import { CardListComponent } from './components/base-components/card-list/card-l
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }
+    },
+    CheckSessionService,
+    BaseWalletProviderService,
+    LoginWalletProviderService,
   ],
   bootstrap: [AppComponent]
 })

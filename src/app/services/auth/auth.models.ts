@@ -6,12 +6,14 @@ export enum LoggedStatus {
 
 export interface UserInfo {
     isLogged: LoggedStatus;
+    isProvider: LoggedStatus;
     user?: {
         username?: string;
         surname?: string;
         firstname?: string;
         wallets?: Wallet[]
     },
+    provider?: any
 }
 
 export interface Wallet {

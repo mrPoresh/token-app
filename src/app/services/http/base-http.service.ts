@@ -14,7 +14,10 @@ export const LOGOUT_USER: string = "/umg/logout";
 export const CREATE_WALLET: string = "/wallet/addwallet";
 export const CREATE_ACCOUNT: string = "/wallet/addacc";
 
-export const GET_FRONT_LIST: string = '/nfts/getfrontpagedata';
+export const GET_FRONT_PAGE: string = '/nfts/getFrontPageData';
+export const GET_FRONT_LISTS: string = '/nfts/getFrontListsData';
+export const GET_FRONT_TABS_VOLUME: string = '/nfts/getFrontTabsByVolume';
+export const GET_FRONT_TABS_MINT: string = '/nfts/getFrontTabsByMints';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +49,7 @@ export class BaseHttpService {
 
   public postRequest<T>(url: string, formGroup: FormGroup/* , token?: string */) {
     //let headers = this.createHeaders(token);
+    console.log(formGroup.value)
     return this.http.post<T>(this.apiUrl + url, { params: formGroup.value });
   }
 

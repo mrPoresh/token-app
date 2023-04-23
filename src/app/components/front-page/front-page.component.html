@@ -12,17 +12,85 @@
         </div>
     </div>
 
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <div class="opt-cont">
+        <div class="toggle-cont">
+            <mat-button-toggle-group #group1="matButtonToggleGroup" value="D7" (click)="setPeriod(group1.value)">
+                <mat-button-toggle class="small-btn" value="H1">
+                    H1
+                </mat-button-toggle>
+                <mat-button-toggle class="small-btn" value="D1">
+                    D1
+                </mat-button-toggle>
+                <mat-button-toggle class="small-btn" value="D7">
+                    D7
+                </mat-button-toggle>
+                <mat-button-toggle class="small-btn" value="D30">
+                    D30
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <mat-button-toggle-group #group2="matButtonToggleGroup" [value]="tabsState" (click)="setState(group2.value)">
+                <mat-button-toggle class="large-btn" [value]="_tabsState.byVolume">
+                    Total Volume
+                </mat-button-toggle>
+                <mat-button-toggle class="large-btn" [value]="_tabsState.byMints">
+                    Mint Lider
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+
+        <div class="input-cont">
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Select chain</mat-label>
+                <mat-select [(value)]="frontForm.value.blockchain">
+                  <mat-option value="ETHEREUM" (click)="updateTabs()" (click)="updateLists()">ethereum</mat-option>
+                  <mat-option value="FLOW" (click)="updateTabs()" (click)="updateLists()">flow</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Select MarketPlace</mat-label>
+                <mat-select [(value)]="frontForm.value.source">
+                  <mat-option value="EXTERNAL" (click)="updateTabs()">OpenSea</mat-option>
+                  <mat-option value="RARIBLE" (click)="updateTabs()">Rarible</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    </div>
+
+
+    <!-- <div *ngFor="let chain of tab.value! | keyvalue"> -->
+        <div class="grid-b-container" cols="2" *ngIf="tabSet">
+            <div class="grid-btn-container" *ngFor="let item of tabSet; let i = index">
+                <button mat-flat-button class="grid-btn">
+                    <div class="btn-space" fxLayout="row" fxLayoutAlign="start center">
+                        <span>{{i + 1}}</span>
+                        <span class="space"></span>
+                        <img src="{{item.meta.content.url!}}" style="max-height: 70px; object-fit: cover; border-radius: 10px;" >
+                        <span class="space"></span>
+                        <span>{{item.name}}</span>
+                        <span class="space"></span>
+                        <span>{{item.volumeNative.value}} {{item.volumeNative.currency}}</span>
+                        <span class="space"></span>
+                        <span>{{item.volumeUsd.value}} {{item.volumeUsd.currency}} {{item.volumeUsd.changePercent}} %</span>
+                        <span class="space"></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    <!-- </div> -->    
+
+<!--     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
         <div *ngFor="let tab of tabSet | keyvalue">
             <mat-tab label="{{tab.key}}"> 
                 <div *ngFor="let chain of tab.value! | keyvalue">
-                    <div class="grid-container" cols="2" *ngIf="choosedToken == chain.key">
+                    <div class="grid-b-container" cols="2" *ngIf="choosedToken == chain.key">
                         <div class="grid-btn-container" *ngFor="let item of chain.value!; let i = index">
                             <button mat-flat-button class="grid-btn">
                                 <div class="btn-space" fxLayout="row" fxLayoutAlign="start center">
                                     <span>{{i + 1}}</span>
                                     <span class="space"></span>
-                                    <img src="{{item.metadata.image}}" style="max-height: 70px; object-fit: cover;">
+                                    <img src="{{item.metadata.image}}" style="max-height: 70px; object-fit: cover; border-radius: 10px;">
                                     <span class="space"></span>
                                     <span>{{item.name}}</span>
                                 </div>
@@ -32,30 +100,37 @@
                 </div>    
             </mat-tab>
         </div>
-    </mat-tab-group>
-
-    <div *ngIf="data_set" style="width: 100%;">
-        <div class="list" *ngFor="let category of data_set.data">
-            <app-card-list [category]="category" style="width: 100%;"></app-card-list>
-        </div>
-    </div>
-</div>
-
-<!--     <div *ngIf="nftLists" class="list" fxLayout="column" fxLayoutAlign="start center">
-        <div fxLayout="row wrap" fxLayoutGap="10px grid" *ngFor="let _category of data_set.data">
-            <div fxFlex.xl="20%" fxFlex.lg="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let item of _category | keyvalue">
-                <app-card [data]="item.value"></app-card>
+    </mat-tab-group> -->
+    
+    <div class="list-section">
+        <div class="list-container" *ngFor="let list of listsSet | keyvalue">
+            <h2>{{list.key}}</h2>
+            <div style="width: 100%;" fxLayout="row wrap">
+                <div fxFlex.xl="20%" fxFlex.lg="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let item of list.value!">
+                    <mat-card class="mat-elevation-z4">
+                        <mat-card-content>
+                            <img src="{{item.meta.content.url}}" style="width: 100%; max-width: 400px; object-fit: cover;">
+                        </mat-card-content>
+                    </mat-card>
+                </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
-    <!-- <div *ngIf="nftLists" class="list" fxLayout="column" fxLayoutAlign="start center">
-        <div style="width: 100%;" *ngFor="let _category of nftLists.data">
-            <div style="width: 100%;" fxLayout="row wrap" fxLayoutGap="10px grid" *ngFor="let item of _category | keyvalue">
-
-                <div style="width: 100%;" fxFlex.xl="20%" fxFlex.lg="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let nft of item.value! | keyvalue">
-                    <app-card style="width: 100%;" [data]="nft.value[0]"></app-card>
+    <!-- <div class="list-section">
+        <div class="list-container" *ngFor="let list of listsSet | keyvalue">
+            <h2>{{list.key}}</h2>
+            <div class="list-row" *ngFor="let chain of list.value! | keyvalue">
+                <div style="width: 100%;" *ngIf="choosedToken == chain.key" fxLayout="row wrap">
+                    <div fxFlex.xl="20%" fxFlex.lg="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let item of chain.value!">
+                        <mat-card class="mat-elevation-z4">
+                            <mat-card-content>
+                                <img *ngIf="item.metadata" src="{{item.metadata.image}}" style="width: 100%; max-width: 400px; object-fit: cover;">
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
         </div>
     </div> -->
+</div>

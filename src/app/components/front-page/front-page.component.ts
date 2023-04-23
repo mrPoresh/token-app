@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { DataNftService } from 'src/app/services/http/data-nft.service';
@@ -12,6 +12,8 @@ export interface ForntDataResponce {
   ]
 };  
 
+export enum TabsState { byVolume = 'byVolume', byMints = 'byMints'};
+
 @Component({
   selector: 'app-front-page',
   templateUrl: './front-page.component.html',
@@ -23,14 +25,31 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
   public category = PromotedNFTs.all;
   public data_set!: ForntDataResponce;  //
 
-  public choosedToken = 'ethereum';
-  public listsSet: any = undefined;
-  public tabSet: any = undefined;
+  
   public isExtend = true;
+
+  /* --------------------------- */
+
+  public _tabsState = TabsState;
+  public tabsState = TabsState.byVolume;
+  public choosedToken = 'ETHEREUM';
+
+  public tabSet: any = undefined;
+  public listsSet = undefined;
+
+  frontForm = this.formBuilder.group({
+    limit: 10,
+    source: ['EXTERNAL', Validators.required],
+    blockchain: ['ETHEREUM', Validators.required],
+    period: ['D7', Validators.required],
+    sort: ['VOLUME_USD_DESC', Validators.required],
+  });
+
+  /* --------------------------- */
 
   constructor(
     private router: Router,
-    private formBulder: FormBuilder,
+    private formBuilder: FormBuilder,
     private dataService: DataNftService,
     private loader: LoaderService,
   ) {
@@ -44,16 +63,56 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
       this.isExtend = false;
     }
 
-    this.dataService.getFrontPageLists().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
-      this.tabSet = res.data.tabs;
-      console.log(this.tabSet);
+    this.dataService.getFrontPageData().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.tabSet = this.validate(res.data.tab);
+      this.listsSet = res.data.lists;
       this.loader.hide();
     });
     
   }
 
-  changeTokenTab() {
+  setPeriod(value: any) {
+    this.frontForm.patchValue({ period: value });
+    this.updateTabs();
+  }
 
+  setState(value: any) {
+    this.tabsState = value;
+    this.updateTabs();
+  }
+
+  updateLists() {
+    this.dataService.getFrontPageListsData(this.frontForm).pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+      this.listsSet = res.data;
+    });
+  }
+
+  updateTabs() {
+    if (this.tabsState === this._tabsState.byVolume) {
+      this.dataService.getFrontTabsByVolume(this.frontForm).pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+        this.tabSet = this.validate(res.data);
+      });
+    } else if (this.tabsState === this._tabsState.byMints) {
+      this.frontForm.patchValue({ sort: 'COLLECTION_DESC' });
+      this.dataService.getFrontTabsByMints(this.frontForm).pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+        this.tabSet = this.validate(res.data);
+      });
+    }
+    
+  }
+
+  validate(data: any) {
+    for (const item of data) {
+      if (!(item.meta.content)) {
+        item.meta.content = { url: '/assets/icons/user_avatar.png' };
+      };
+
+      item.volumeNative.value = Math.round(item.volumeNative.value);
+      item.volumeUsd.value = Math.round(item.volumeUsd.value);
+      item.volumeUsd.changePercent = Math.round(item.volumeUsd.changePercent);
+    }
+
+    return data
   }
 
   changeCategory(category: any) {

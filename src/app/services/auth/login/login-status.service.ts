@@ -10,6 +10,7 @@ export class LoginStatusService {
 
   private userInfo = new BehaviorSubject<UserInfo>({
     isLogged: LoggedStatus.voidState,
+    isProvider: LoggedStatus.voidState,
   });
 
   constructor() { }

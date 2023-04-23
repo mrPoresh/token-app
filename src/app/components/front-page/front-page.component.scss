@@ -30,58 +30,159 @@
         }
     }
 
-    mat-tab-group {
+    .opt-cont {
         width: calc(100% - 60px);
-        padding-left: 30px;
-        padding-right: 30px;
+        //height: 70px;
 
-        .grid-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+
+        .toggle-cont {
+            max-width: 500px;
             width: 100%;
-            min-width: 500px;
-
-            max-height: 300px;  // for 3 x 2 , 500 for top 10
 
             display: flex;
             flex-direction: column;
-            flex-wrap: wrap;
 
-            .grid-btn-container {
-                width: 50%;
-                height: 100px;
+            mat-button-toggle-group {
+                width: 100%;
 
-                .grid-btn {
-                    height: 100%;
-                    width: 100%;
+                margin-top: 10px;
+    
+                //align-self: center;
+    
+                border-radius: 7px;
+                border: solid 1px #636363;
+                background-color: #fcfcfc;
+    
+                .small-btn {
+                    width: 25%;
+                    //height: 56px;
+    
+                    border-radius: 7px;
+                }
+    
+                .large-btn {
+                    width: 50%;
+                    //height: 56px;
+    
+                    border-radius: 7px;
+                }
+    
+            }
+        }
 
-                    .btn-space {
-                        width: 100% !important;
-                        padding-left: 7.5%;
-                        padding-right: 7.5%;
+        .input-cont {
+            max-width: 500px;
+            width: 100%;
+            height: 100%;
 
-                        .space {
-                            width: 10%;
-                        }
+            padding-top: 10px;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+
+            .input-field {
+                width: 200px;
+                height: 100%;
+            }
+        }
+    }
+
+
+    .grid-b-container {
+        width: calc(100% - 60px);
+        min-width: 300px; // 600
+        max-height: 500px;  // for 3 x 2 , 500 for top 10
+
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 40px;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        .grid-btn-container {
+            width: 50%;
+            height: 100px;
+
+            .grid-btn {
+                height: 100%;
+                width: 100%;
+
+                .btn-space {
+
+                    .space {
+                        width: 10%;
                     }
                 }
             }
         }
-
     }
 
-    .list {
-        width: 100%;
-        background-image: rgb(255, 255, 255);
+    .list-section {
+        width: calc(100% - 60px);
+        padding-left: 30px;
+        padding-right: 30px;
+
+        padding-top: 40px;
+
+        .list-container {
+            width: 100%;
+
+            padding-top: 20px;
+
+            .list-row {
+                width: 100%;
+            }
+        }
+
+        /* background-image: rgb(255, 255, 255);
 
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: flex-start;
         align-items: stretch;
-        gap: 10px 10px;
+        gap: 10px 10px; */
     }
 }
 
-.mdc-button .mdc-button__label {
+::ng-deep .mdc-button .mdc-button__label {
     position: relative;
     width: 100% !important;
+}
+
+::ng-deep .mat-button-toggle-group-appearance-standard .mat-button-toggle+.mat-button-toggle {
+    border-left: 0px;
+}
+
+::ng-deep .mat-button-toggle-appearance-standard {
+    color: rgba(0,0,0,.87);
+    background: #fcfcfc;
+}
+
+::ng-deep .mat-button-toggle-checked {
+    background-color: #dbdbdb;
+}
+
+::ng-deep .input-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 7px;
+    border: solid 1px #636363;
+}
+
+::ng-deep .input-field .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+}
+
+::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    //height: 56px !important;
 }
