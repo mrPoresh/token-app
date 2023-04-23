@@ -3,7 +3,8 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable, switchMap, map, of } from 'rxjs';
 import { loginTrx, menuOutlet } from 'src/app/router-translation.labels';
 import { LoggedStatus } from 'src/app/services/auth/auth.models';
-import { LoginStatusService } from 'src/app/services/auth/login/login-status.service';
+import { LoginStatusService } from 'src/app/services/auth/status/login-status.service';
+
 import { SlideMenuBtnService } from '../../utils/slide-menu-btn.service';
 
 @Injectable({

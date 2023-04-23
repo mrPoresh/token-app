@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DataNftService } from './data-nft.service';
+import { WalletsService } from './wallets.service';
 
-describe('DataNftService', () => {
-  let service: DataNftService;
+describe('WalletsService', () => {
+  let service: WalletsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DataNftService);
+    service = TestBed.inject(WalletsService);
   });
 
   it('should be created', () => {

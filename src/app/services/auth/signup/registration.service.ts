@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, map, Observable } from 'rxjs';
-import { BaseHttpService, SIGNUP_URL } from '../../http/base-http.service';
+import { SIGNUP_URL } from '../../http/base-http.service';
+import { BaseUsermgrService } from '../../http/base-usermgr.service';
 import { RegistrationResponse } from '../auth.models';
 import { CheckSessionService } from '../check-session/check-session.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrationService extends BaseHttpService {
+export class RegistrationService extends BaseUsermgrService {
 
   constructor(
     http: HttpClient, 
@@ -21,8 +22,8 @@ export class RegistrationService extends BaseHttpService {
     super(http, cookie) 
   }
 
-  public postRegistration(registrationStepForm: FormGroup): Observable<string> {
-    return super.postRequest<RegistrationResponse>(SIGNUP_URL, registrationStepForm).pipe(
+  public postRegistration(registrationForm: FormGroup): Observable<string> {
+    return super.postRequest<RegistrationResponse>(SIGNUP_URL, registrationForm).pipe(
       map((res) => {
         this.cookie.set("session", res.data.token);
         this.checkSessionService.requestCheckSession();

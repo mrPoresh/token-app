@@ -1,13 +1,11 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
-import { takeUntil } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs';
 
 import { BasePageComponent } from './components/base-components/base-page/base-page.component';
 import { loginTrx, signUpTrx, menuOutlet, walletTrx, userTrx } from './router-translation.labels';
-import { LoggedStatus } from './services/auth/auth.models';
 import { CheckSessionService } from './services/auth/check-session/check-session.service';
-import { BaseHttpService } from './services/http/base-http.service';
 import { SlideMenuBtnService } from './utils/slide-menu-btn.service';
 
 @Component({
@@ -24,7 +22,6 @@ export class AppComponent extends BasePageComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private menuService: SlideMenuBtnService,
-    private baseHttpService: BaseHttpService,
     private checkSessionService: CheckSessionService
   ) {
     super()
@@ -42,7 +39,18 @@ export class AppComponent extends BasePageComponent implements OnInit {
       }
     });
     
-    this.checkSessionService.requestCheckSession();
+    /* dublicate */
+    this.checkSessionService.requestCheckSession().pipe(
+      takeUntil(this.unsubscribe),
+    ).subscribe((res) => {
+      
+    });
+
+    this.checkSessionService.requestCheckProviderSession().pipe(
+      takeUntil(this.unsubscribe)
+    ).subscribe((res) => {
+      
+    });
 
   }
 

@@ -56,9 +56,3 @@ export interface RegistrationResponse {
         mnemonic: string,
     }
 }
-
-export interface CreateWalletResponse {
-    data: {
-        mnemonic: string,
-    }
-}

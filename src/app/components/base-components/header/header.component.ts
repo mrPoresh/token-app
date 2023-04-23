@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { loginTrx, menuOutlet, userTrx, walletTrx } from 'src/app/router-translation.labels';
 import { LoggedStatus } from 'src/app/services/auth/auth.models';
-import { LoginStatusService } from 'src/app/services/auth/login/login-status.service';
+import { LoginStatusService } from 'src/app/services/auth/status/login-status.service';
+
 import { SlideMenuBtnService } from 'src/app/utils/slide-menu-btn.service';
 import { BasePageComponent } from '../base-page/base-page.component';
 

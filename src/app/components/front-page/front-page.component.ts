@@ -2,15 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
-import { DataNftService } from 'src/app/services/http/data-nft.service';
+import { NftDataService } from 'src/app/services/nft/nft-data.service';
 import { LoaderService } from 'src/app/utils/loader.service';
 import { BasePageComponent } from '../base-components/base-page/base-page.component';
-
-export interface ForntDataResponce {
-  data: [
-    undefined
-  ]
-};  
 
 export enum TabsState { byVolume = 'byVolume', byMints = 'byMints'};
 
@@ -23,7 +17,6 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
 
   public PromotedNFTs = PromotedNFTs; // ?
   public category = PromotedNFTs.all;
-  public data_set!: ForntDataResponce;  //
 
   
   public isExtend = true;
@@ -50,7 +43,7 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private dataService: DataNftService,
+    private nftDataService: NftDataService,
     private loader: LoaderService,
   ) {
     super();
@@ -63,7 +56,7 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
       this.isExtend = false;
     }
 
-    this.dataService.getFrontPageData().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+    this.nftDataService.getFrontPageData().pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
       this.tabSet = this.validate(res.data.tab);
       this.listsSet = res.data.lists;
       this.loader.hide();
@@ -82,19 +75,19 @@ export class FrontPageComponent extends BasePageComponent implements OnInit {
   }
 
   updateLists() {
-    this.dataService.getFrontPageListsData(this.frontForm).pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+    this.nftDataService.getFrontPageListsData(this.frontForm).pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
       this.listsSet = res.data;
     });
   }
 
   updateTabs() {
     if (this.tabsState === this._tabsState.byVolume) {
-      this.dataService.getFrontTabsByVolume(this.frontForm).pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+      this.nftDataService.getFrontTabsByVolume(this.frontForm).pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
         this.tabSet = this.validate(res.data);
       });
     } else if (this.tabsState === this._tabsState.byMints) {
       this.frontForm.patchValue({ sort: 'COLLECTION_DESC' });
-      this.dataService.getFrontTabsByMints(this.frontForm).pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+      this.nftDataService.getFrontTabsByMints(this.frontForm).pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
         this.tabSet = this.validate(res.data);
       });
     }

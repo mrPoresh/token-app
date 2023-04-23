@@ -4,65 +4,63 @@ import { Observable } from 'rxjs';
 import { catchError, map, share, switchMap } from 'rxjs/operators';
 import { BaseHttpService, USER_INFO_SESSION } from '../../http/base-http.service';
 import {CookieService } from 'ngx-cookie-service';
-import { LoginStatusService } from '../login/login-status.service';
 import { UserInfo, LoggedStatus } from '../auth.models';
 import { FormBuilder } from '@angular/forms';
-import { LoginWalletProviderService } from '../../web3-providers/login-wallet-provider.service';
+import { BaseUsermgrService } from '../../http/base-usermgr.service';
+import { LoginStatusService } from '../status/login-status.service';
+import { LoginProviderService } from '../../provider/login-provider.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CheckSessionService extends BaseHttpService {
-
+export class CheckSessionService extends BaseUsermgrService {
 
   constructor(
     http: HttpClient, 
     cookie: CookieService, 
     private loginStatusService: LoginStatusService, 
-    private loginWalletService: LoginWalletProviderService, 
+    private loginProviderService: LoginProviderService,
     public formBuilder: FormBuilder) {
     super(http,cookie);
   }
 
-  public requestCheckSession () {
-    const token = this.cookie.get('session');
-    this.loginWalletService.createConnector();
-    
-    if (token) {
-      return this.getRequest<UserInfo>(USER_INFO_SESSION, undefined).pipe(
-        map((res) => {
-          this.loginStatusService.updateUserInfo({
-            isLogged: LoggedStatus.logged,
-            user: res
-          });
-        }),
-        map(() => {
-          this.loginWalletService.getConnection().pipe(
-            map((res: any) => {
-              this.loginStatusService.updateUserInfo({
-                isProvider: res.status === "connected" ? LoggedStatus.logged : LoggedStatus.notLogged,
-                provider: res.status === "connected" ? res.connection : undefined, /* res.connection.address : undefined, */
-              });
+  public requestCheckSession (): Observable<UserInfo> {
+    return super.get<UserInfo>(USER_INFO_SESSION).pipe(
+      switchMap((res) => {this.loginStatusService.updateUserInfo({
+          isLogged: LoggedStatus.logged,
+          user: res
+        });
 
-              if (res.status === "connected") {
-                this.loginWalletService.initSDKwithProvider(res.connection.wallet);
-              } else {
-                this.loginWalletService.initSDKwiithOutProvider();
-              }
-            })
-          );
-        }),
-        switchMap(() => this.loginStatusService.getLoginStatus()),
-        catchError((err) => {
-          this.loginStatusService.updateUserInfo({isLogged: LoggedStatus.notLogged});
-          this.loginWalletService.initSDKwiithOutProvider();
-          return this.loginStatusService.getLoginStatus();
-        })
-      );
-    } else {
-      this.loginStatusService.updateUserInfo({isLogged: LoggedStatus.notLogged});
-      this.loginWalletService.initSDKwiithOutProvider();
-      return this.loginStatusService.getLoginStatus();
-    }
+        return this.loginStatusService.getLoginStatus();
+      }),
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.loginStatusService.updateUserInfo({isLogged: LoggedStatus.notLogged, user: undefined});
+        }
+        
+        return this.loginStatusService.getLoginStatus();
+      })
+    );
   }
+
+  public requestCheckProviderSession (): Observable<UserInfo> {
+    this.loginProviderService.createConnector();
+    return this.loginProviderService.getConnection().pipe(
+      switchMap((res: any) => {
+        this.loginStatusService.updateUserInfo({
+          isProvider: res.status === "connected" ? LoggedStatus.logged : LoggedStatus.notLogged,
+          provider: res.status === "connected" ? res.connection : undefined, // res.connection.address : undefined,
+        });
+
+        if (res.status === "connected") {
+          this.loginProviderService.initSDKwithProvider(res.connection.wallet);
+        } else {
+          this.loginProviderService.initSDKwiithOutProvider();
+        }
+
+        return this.loginStatusService.getLoginStatus(); 
+      })
+    );
+  }
+  
 }

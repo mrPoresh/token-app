@@ -6,7 +6,7 @@ import { LoggedStatus, UserInfo } from '../auth.models';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginStatusService {
+export class LoginStatusService { /* extends */
 
   private userInfo = new BehaviorSubject<UserInfo>({
     isLogged: LoggedStatus.voidState,

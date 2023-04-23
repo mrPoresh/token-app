@@ -44,7 +44,7 @@ export class LoginComponent extends BasePageComponent implements OnInit {
   onSubmit(loginForm: FormGroup) {
     this.loader.show({status: true});
     this.loginService.requestLoginUser(loginForm).subscribe({
-      next: (res) => { console.log(res); this.menuService.updateMenuStatus(false); this.loader.hide() },
+      next: (res) => { this.menuService.updateMenuStatus(false); this.loader.hide() },
       error: (err) => { console.log(err); this.loader.hide()}
     });
   }

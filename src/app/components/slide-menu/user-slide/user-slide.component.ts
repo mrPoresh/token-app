@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { switchMap, takeUntil } from 'rxjs';
 import { UserInfo } from 'src/app/services/auth/auth.models';
 import { CheckSessionService } from 'src/app/services/auth/check-session/check-session.service';
-import { LoginEmailService } from 'src/app/services/auth/login/login-email.service';
-import { LoginStatusService } from 'src/app/services/auth/login/login-status.service';
+import { LogoutService } from 'src/app/services/auth/logout/logout.service';
+import { LoginStatusService } from 'src/app/services/auth/status/login-status.service';
 import { SlideMenuBtnService } from 'src/app/utils/slide-menu-btn.service';
 import { BasePageComponent } from '../../base-components/base-page/base-page.component';
 
@@ -17,10 +17,10 @@ export class UserSlideComponent extends BasePageComponent implements OnInit {
   public User!: UserInfo;
 
   constructor(
-    private loginStatusService: LoginStatusService,
-    private checkSessionService: CheckSessionService,
     private menuService: SlideMenuBtnService,
-    private userHttpServeice: LoginEmailService
+    private loginStatusService: LoginStatusService,
+    private logoutService: LogoutService,
+    private checkSessionService: CheckSessionService,
   ) {
     super();
   }
@@ -32,10 +32,9 @@ export class UserSlideComponent extends BasePageComponent implements OnInit {
   }
 
   logOut() {
-    this.menuService.updateMenuStatus(false);
-    this.userHttpServeice.logOut().pipe(
-      switchMap((res) => this.checkSessionService.requestCheckSession())
-    );
+    this.logoutService.logOut().pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+      this.menuService.updateMenuStatus(false);
+    });
   }
 
 }

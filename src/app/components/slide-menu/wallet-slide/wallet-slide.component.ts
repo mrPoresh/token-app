@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { switchMap, takeUntil } from 'rxjs';
 import { UserInfo } from 'src/app/services/auth/auth.models';
-import { CheckSessionService } from 'src/app/services/auth/check-session/check-session.service';
-import { LoginStatusService } from 'src/app/services/auth/login/login-status.service';
-import { BaseWalletService } from 'src/app/services/http/base-wallet.service';
+import { UserInfoService } from 'src/app/services/auth/info/user-info.service';
+import { LoginStatusService } from 'src/app/services/auth/status/login-status.service';
+import { WalletsService } from 'src/app/services/wallets/wallets.service';
 import { LoaderService } from 'src/app/utils/loader.service';
 import { BasePageComponent } from '../../base-components/base-page/base-page.component';
 
@@ -48,8 +48,8 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
     private loginStatusService: LoginStatusService,
     private loader: LoaderService,
     private formBuilder: FormBuilder,
-    private walletService: BaseWalletService,
-    private checkSessionService: CheckSessionService,
+    private walletsService: WalletsService,
+    private userInfoService: UserInfoService,
   ) {
     super();
     this.loader.show({status: true});
@@ -77,14 +77,13 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
     this.changeAddWalletStatus(false);
     this.changeIsWalletAddedStatus(true);
 
-    this.walletService.createWallet(walletForm).pipe(
+    this.walletsService.createWallet(walletForm).pipe(
       takeUntil(this.unsubscribe),
       switchMap((res) => {
-        this.mnemonic = res;
-        return this.checkSessionService.requestCheckSession()
+        this.mnemonic = res.data.mnemonic;
+        return this.userInfoService.requestCheckUserInfo();
       })
     ).subscribe((res) => {
-      console.log('check User', res)
       this.loader.hide();
       this.User = res;
     });
@@ -95,11 +94,10 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
     this.changeAddAccStatus(false);
     this.changeAccountAddedStatus(true);
 
-    this.walletService.createAccount(accountForm).pipe(
+    this.walletsService.createAccount(accountForm).pipe(
       takeUntil(this.unsubscribe),
-      switchMap(() => this.checkSessionService.requestCheckSession())
+      switchMap(() => this.userInfoService.requestCheckUserInfo())
     ).subscribe((res) => {
-      console.log('check User', res)
       this.loader.hide();
       this.User = res;
     });

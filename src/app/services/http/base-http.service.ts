@@ -37,25 +37,31 @@ export class BaseHttpService {
     this.apiUrl = apiUrl;
   }
 
-  createHeaders(token?: string) {
-    console.log(token)
-    let headers = new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': `Bearer ${token}`,
-      'Access-Control-Allow-Origin': '*',
-    });
-    return headers
+  createHeaders(headers: { [name: string]: string | string[] } = {}): HttpHeaders {
+    const newHeaders = {};
+    Object.assign(newHeaders, headers);
+
+    const authToken = this.cookie.get('session');
+    
+    newHeaders['Authorization'] = 'Bearer ' + authToken;
+    newHeaders['Content-Type'] = 'application/json';
+    //newHeaders['Access-Control-Allow-Origin'] = '*';
+
+    return new HttpHeaders(newHeaders);
   }
 
-  public postRequest<T>(url: string, formGroup: FormGroup/* , token?: string */) {
-    //let headers = this.createHeaders(token);
-    console.log(formGroup.value)
+  protected postRequest<T>(url: string, formGroup: FormGroup) {
     return this.http.post<T>(this.apiUrl + url, { params: formGroup.value });
   }
 
-  public getRequest<T>(url: string, formGroup?: FormGroup/* , token?: string */) {
-    //headers = this.createHeaders(token);
+  protected getRequest<T>(url: string, formGroup?: FormGroup) {
     return this.http.get<T>(this.apiUrl + url, { params: formGroup?.value });
   }
+
+  protected get<T>(url: string) {
+    return this.http.get<T>(this.apiUrl + url);
+  }
+
+  /* later add error handling */
   
 }

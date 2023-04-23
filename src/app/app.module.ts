@@ -19,16 +19,16 @@ import { SignupStepThreeComponent } from './components/auth/signup/signup-step-t
 import { LoaderComponent } from './components/base-components/loader/loader.component';
 import { WalletSlideComponent } from './components/slide-menu/wallet-slide/wallet-slide.component';
 import { UserSlideComponent } from './components/slide-menu/user-slide/user-slide.component';
-import { LoginStatusService } from './services/auth/login/login-status.service';
-import { AuthInterceptor } from './interceptors/auth-Interceptor-http.interceptor';
+import { LoginStatusService } from './services/auth/status/login-status.service';
 import { PromotedComponent } from './components/front-page/promoted/promoted.component';
 import { TopListComponent } from './components/front-page/top-list/top-list.component';
 import { CardComponent } from './components/base-components/card/card.component';
 import { HeaderComponent } from './components/base-components/header/header.component';
 import { CardListComponent } from './components/base-components/card-list/card-list.component';
 import { CheckSessionService } from './services/auth/check-session/check-session.service';
-import { BaseWalletProviderService } from './services/web3-providers/base-wallet-provider.service';
-import { LoginWalletProviderService } from './services/web3-providers/login-wallet-provider.service';
+import { CookieService } from 'ngx-cookie-service';
+import { BaseProviderService } from './services/provider/base-provider.service';
+import { LoginProviderService } from './services/provider/login-provider.service';
 
 
 @NgModule({
@@ -60,15 +60,11 @@ import { LoginWalletProviderService } from './services/web3-providers/login-wall
     HttpClientModule
   ],
   providers: [
+    CookieService,
     LoginStatusService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
     CheckSessionService,
-    BaseWalletProviderService,
-    LoginWalletProviderService,
+    BaseProviderService,
+    LoginProviderService
   ],
   bootstrap: [AppComponent]
 })

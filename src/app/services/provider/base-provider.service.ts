@@ -6,7 +6,7 @@ import { createRaribleSdk } from "@rarible/sdk"
 @Injectable({
   providedIn: 'root'
 })
-export class BaseWalletProviderService {
+export class BaseProviderService {
 
   public raribleSdk!: IRaribleSdk;
 

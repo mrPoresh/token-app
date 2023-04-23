@@ -19,7 +19,6 @@ export class LoaderComponent extends BasePageComponent implements OnInit {
 
   ngOnInit() {
     this.loaderService.attach().pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
-      console.log('loader', res);
       this.isShow = res.status;
 
       if (res.params) {

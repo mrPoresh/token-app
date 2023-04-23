@@ -4,15 +4,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, map, Observable, switchMap } from 'rxjs';
 
-import { BaseHttpService, LOGIN_EMAIL_URL, LOGOUT_USER } from '../../http/base-http.service';
+import { LOGIN_EMAIL_URL, LOGOUT_USER } from '../../http/base-http.service';
+import { BaseUsermgrService } from '../../http/base-usermgr.service';
 import { LoginEmailResponse, UserInfo } from '../auth.models';
 import { CheckSessionService } from '../check-session/check-session.service';
-import { LoginStatusService } from './login-status.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginEmailService extends BaseHttpService {
+export class LoginEmailService extends BaseUsermgrService {
 
   constructor(
     http: HttpClient, 
@@ -24,12 +24,11 @@ export class LoginEmailService extends BaseHttpService {
   }
 
   requestLoginUser(loginForm: FormGroup) {
-    return this.postRequest<LoginEmailResponse>(LOGIN_EMAIL_URL, loginForm).pipe(
-      map((res) => {
-        console.log('comrad our key is', res)
+    return super.postRequest<LoginEmailResponse>(LOGIN_EMAIL_URL, loginForm).pipe(
+      switchMap((res) => {
         this.cookie.set("session", res.data.token);
+        return this.checkSessionService.requestCheckSession();
       }),
-      switchMap((res) => this.checkSessionService.requestCheckSession()),
       catchError((err) => {
         console.log('incorrect data maybe')
         return this.checkSessionService.requestCheckSession()
@@ -37,15 +36,11 @@ export class LoginEmailService extends BaseHttpService {
     );
   }
 
-  getCookie() {
-    return this.cookie.get("session")
-  }
-
-  logOut() {  /////////////
+  logOut() {  /* rebuild */
     let token = this.cookie.get("session");
     this.cookie.delete("session");
     let tokenForm = this.formBuilder.group({token: token});
-    return this.postRequest(LOGOUT_USER, tokenForm)
+    return super.postRequest(LOGOUT_USER, tokenForm)
   }
 
 }

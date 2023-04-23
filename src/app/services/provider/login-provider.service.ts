@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseWalletProviderService } from './base-wallet-provider.service';
+import { BaseProviderService } from './base-provider.service';
 import { from, Observable } from 'rxjs';
 
 import Web3 from 'web3';
@@ -19,7 +19,7 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class LoginWalletProviderService extends BaseWalletProviderService {
+export class LoginProviderService extends BaseProviderService {
 
   private connector: any;
 
