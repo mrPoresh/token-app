@@ -18,6 +18,7 @@ export class HeaderComponent extends BasePageComponent implements OnInit {
   public isExtend = false;
   public isFull = true;
   public isLogged = false;
+  public isProvider = false;
 
   loginTrx = loginTrx;
   userTrx = userTrx;
@@ -59,6 +60,12 @@ export class HeaderComponent extends BasePageComponent implements OnInit {
         this.isLogged = true
       } else {
         this.isLogged = false
+      }
+
+      if (res.isProvider === LoggedStatus.logged) {
+        this.isProvider = true
+      } else {
+        this.isProvider = false
       }
     });
   }

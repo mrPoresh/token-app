@@ -49,7 +49,7 @@ export class AppComponent extends BasePageComponent implements OnInit {
     this.checkSessionService.requestCheckProviderSession().pipe(
       takeUntil(this.unsubscribe)
     ).subscribe((res) => {
-      
+      console.log(res)
     });
 
   }

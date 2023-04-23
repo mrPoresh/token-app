@@ -10,5 +10,8 @@
 
     </div>
 
-    <button mat-flat-button color="warn" (click)="logOut()">Log Out</button>
+    <div style="width: 100%;" fxLayout="column" fxLayoutAlign="start center" >
+        <button *ngIf="isProvider" mat-flat-button color="warn" (click)="logOutProvider()">Log Out Provider</button>
+        <button mat-flat-button color="warn" (click)="logOut()">Log Out</button>
+    </div>
 </div>

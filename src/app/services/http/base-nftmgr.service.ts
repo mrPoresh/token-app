@@ -20,7 +20,7 @@ export class BaseNftmgrService extends BaseHttpService {
   protected postRequest<T>(url: string, formGroup: FormGroup) {
     const httpOptionsDefault = {
       headers: this.createHeaders(),  /* this.extendHeaders() */
-      withCredentials: true
+      //withCredentials: true
     };
     
     const params = formGroup.value

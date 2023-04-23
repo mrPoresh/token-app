@@ -13,7 +13,7 @@ export interface UserInfo {
         firstname?: string;
         wallets?: Wallet[]
     },
-    provider?: any
+    provider?: Provider
 }
 
 export interface Wallet {
@@ -42,6 +42,11 @@ export interface Deposit {
     derivationKey: number,
     address: string,
     currency: string,
+}
+
+export interface Provider {
+    address: string,
+    wallet: any
 }
 
 export interface LoginEmailResponse {

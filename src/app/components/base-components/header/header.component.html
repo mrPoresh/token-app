@@ -27,7 +27,11 @@
         </mat-menu>
         </ng-template>
 
-        <button mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(walletTrx)">
+        <button *ngIf="!isProvider && isLogged" mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(walletTrx)">
+            <mat-icon matBadge="1" matBadgeColor="primary">account_balance_wallet</mat-icon>
+        </button>
+
+        <button *ngIf="isProvider || !isLogged" mat-icon-button (click)="openMenu()" (click)="navigateSlideMenu(walletTrx)">
             <mat-icon>account_balance_wallet</mat-icon>
         </button>
 

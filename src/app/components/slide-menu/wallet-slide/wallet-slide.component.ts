@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { switchMap, takeUntil } from 'rxjs';
-import { UserInfo } from 'src/app/services/auth/auth.models';
+import { LoggedStatus, UserInfo } from 'src/app/services/auth/auth.models';
 import { UserInfoService } from 'src/app/services/auth/info/user-info.service';
 import { LoginStatusService } from 'src/app/services/auth/status/login-status.service';
 import { WalletsService } from 'src/app/services/wallets/wallets.service';
 import { LoaderService } from 'src/app/utils/loader.service';
 import { BasePageComponent } from '../../base-components/base-page/base-page.component';
+import { WindowProviderService } from 'src/app/utils/window-provider.service';
+import { LoginProviderService } from 'src/app/services/provider/login-provider.service';
 
 @Component({
   selector: 'app-wallet-slide',
@@ -24,6 +26,7 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
   ];
 
   public xpubs: any[] = [];
+  public options: any[] = [];
 
   public User!: UserInfo;
 
@@ -33,6 +36,8 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
   public isWalletAdded = false;
   public isAddAccount = false;
   public isAccountAdded = false;
+
+  public isProvider = false;
 
   walletForm = this.formBuilder.group({
     walletname: new FormControl('', [ Validators.required ]),
@@ -50,6 +55,8 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private walletsService: WalletsService,
     private userInfoService: UserInfoService,
+    public winRef: WindowProviderService,
+    private loginProviderService: LoginProviderService,
   ) {
     super();
     this.loader.show({status: true});
@@ -65,12 +72,18 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
         });
       }
 
-      console.log(this.xpubs)
+      if (this.User.isProvider == LoggedStatus.logged) {
+        this.isProvider = true;
+      } else {
+        this.isProvider = false;
+      }
 
       this.loader.hide();
     })
 
   }
+
+  /* ------------------------------------------------------------------ */
 
   createWallet(walletForm: FormGroup) {
     this.loader.show({status: true});
@@ -117,6 +130,82 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
 
   changeAccountAddedStatus(status: boolean) {
     this.isAccountAdded = status;
+  }
+
+  /* ------------------------------------------------------------------ */
+
+  async connectMetamask() {
+    this.loader.show({status: true});
+    if (this.winRef.window.ethereum) {
+      await this.winRef.window.ethereum.request({ method: "eth_requestAccounts" });
+      this.loginProviderService.createConnectorWithMessage();
+
+      this.loginProviderService.getConenctionOptions().subscribe((res: any) => {
+        this.options = res;
+  
+        const option = this.options.find((opt) => {
+          return opt.option === 'Metamask'
+        });
+    
+        if (option) {
+          this.loginProviderService.loginWithWallet(option).then(() => {
+            this.loginProviderService.getConnection().pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+              if (res.status === "connected") {
+                this.loginStatusService.updateUserInfo({
+                  isProvider: res.status === "connected" ? LoggedStatus.logged : LoggedStatus.notLogged,
+                  provider: res.status === "connected" ? res.connection : undefined,
+                });
+              }
+
+              this.loader.hide();
+              this.isProvider = true;
+            });
+          });
+        } else {
+          this.winRef.window.alert("Please Install Metamask");
+          this.loader.hide();
+        }
+  
+      });
+
+    } else {
+      this.winRef.window.alert("Please Install Metamask");
+      this.loader.hide();
+    }
+
+  }
+
+  connectWalletConnect() {
+    this.loginProviderService.createConnectorWithMessage();
+
+    this.loginProviderService.getConenctionOptions().subscribe((res) => {
+      this.options = res;
+
+      const option = this.options.find((opt) => {
+        return opt.option === 'walletconnect'
+      });
+  
+      if (option) {
+        this.loginProviderService.loginWithWallet(option).then(() => {
+          this.loginProviderService.getConnection().pipe(takeUntil(this.unsubscribe)).subscribe((res) => {
+            if (res.status === "connected") {
+              this.loginStatusService.updateUserInfo({
+                isProvider: res.status === "connected" ? LoggedStatus.logged : LoggedStatus.notLogged,
+                provider: res.status === "connected" ? res.connection : undefined,
+              });
+            }
+
+            this.loader.hide();
+            this.isProvider = true;
+          });
+        });
+      } else {
+        this.winRef.window.alert("Please");
+        this.loader.hide();
+      }
+
+    });
+
   }
 
 }

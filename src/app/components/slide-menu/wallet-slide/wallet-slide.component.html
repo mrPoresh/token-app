@@ -1,121 +1,153 @@
 <div class="wallet-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
-    <mat-accordion class="wallets">
-        <mat-expansion-panel *ngFor="let wallet of User.user!.wallets!" hideToggle> <!-- problem with loading, ho to set closed status? -->
-            <mat-expansion-panel-header>
-                <mat-panel-title>{{wallet.walletname}}</mat-panel-title>
-                <mat-panel-description>icon</mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <mat-accordion *ngIf="wallet.accounts" class="accounts">
-                <mat-expansion-panel *ngFor="let account of wallet.accounts!" hideToggle>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>{{account.currency}}</mat-panel-title>
-                        <mat-panel-description>{{account.balance.accountBalance}}</mat-panel-description>
-                    </mat-expansion-panel-header>
-
-                    <!-- <mat-table [dataSource]="account.account.deposits!" class="mat-elevation-z8">
-                        <ng-container matColumnDef="xpub">
-                            <th mat-header-cell *matHeaderCellDef> xpub </th>
-                            <td mat-cell *matCellDef="let element"> {{element.deposit.xpub}} </td>
-                        </ng-container>
+    <div style="width: 100%;" fxLayout="column" fxLayoutAlign="start center">
+        <mat-accordion class="provider">
+            <mat-expansion-panel *ngIf="isProvider" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Web3 Provider
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <mat-icon>account_balance_wallet</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
     
-                        <ng-container matColumnDef="address">
-                            <th mat-header-cell *matHeaderCellDef> address </th>
-                            <td mat-cell *matCellDef="let element"> {{element.deposit.address}} </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </mat-table> -->    <!-- leave for wallets settings component -->
-                </mat-expansion-panel>
-            </mat-accordion>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel *ngIf="isAddAccount" hideToggle expanded>
-            <mat-expansion-panel-header>
-                <mat-panel-title>New Account</mat-panel-title>
-                <mat-panel-description>Choose Currency and Wallet</mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <form name="accountForm" [formGroup]="accountForm" (ngSubmit)="createAccount(accountForm)" fxLayout="column" fxLayoutAlign="start center">
-                <div style="width: 100%;" fxLayout="row" fxLayoutAlign="space-between center">
-                    <mat-form-field class="select" appearance="outline">
-                        <mat-label i18n>Account Currency</mat-label>
-                        <mat-select formControlName="currency">
-                            <mat-option *ngFor="let cur of currency" [value]="cur.value">{{cur.viewValue}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <mat-form-field class="select" appearance="outline">
-                        <mat-label i18n>Wallet</mat-label>
-                        <mat-select formControlName="xpub">
-                            <mat-option *ngFor="let xpub of xpubs" [value]="xpub.value">{{xpub.viewValue}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <button mat-flat-button color="primary" type="submit">Confirm</button>
-            </form>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel *ngIf="isAccountAdded" hideToggle expanded>
-            <mat-expansion-panel-header>
-                <mat-panel-title>Account Added!</mat-panel-title>
-                <mat-panel-description>(0__0)</mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <h3>Nice!!!</h3>
-
-            <button mat-flat-button color="accent" (click)="changeAccountAddedStatus(false)">Confirm</button>
-            
-        </mat-expansion-panel>
-
-        <mat-expansion-panel *ngIf="isAddWallet" hideToggle expanded>
-            <mat-expansion-panel-header>
-                <mat-panel-title>New Wallet</mat-panel-title>
-                <mat-panel-description>Choose Currency and Wallet Name</mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <form name="walletForm" [formGroup]="walletForm" (ngSubmit)="createWallet(walletForm)" fxLayout="column" fxLayoutAlign="start center">
-                <div style="width: 100%;" fxLayout="row" fxLayoutAlign="space-between center">
-                    <mat-form-field class="input" appearance="outline">
-                        <mat-label i18n>Wallet Name</mat-label>
-                        <input matInput formControlName="walletname"> <!-- [type]="hidePassword ? 'password' : 'text'" -->
-                        <!-- <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon> -->
-                        <mat-error *ngIf="walletForm.get('walletname')?.hasError('required')" i18n>Please enter Wallet Name.</mat-error>
-                        <!-- <mat-error *ngIf="registerForm2.get('password')?.hasError('minlength')" i18n>Your password is too short.</mat-error> -->
-                        <!-- <mat-error *ngIf="registerForm1.get('password')?.hasError('pattern')">
-                            {{registerForm1.get('password').errors.pattern.msg}}
-                        </mat-error> -->
-                        <!-- <mat-error *ngIf="registerForm1.get('password')?.errors?.serverError">
-                            {{ registerForm1.get('password').errors?.serverError }}
-                        </mat-error> -->
-                    </mat-form-field>
-
-                    <mat-form-field class="select" appearance="outline">
-                        <mat-label i18n>Wallet Currency</mat-label>
-                        <mat-select formControlName="currency">
-                            <mat-option *ngFor="let cur of currency" [value]="cur.value">{{cur.viewValue}}</mat-option>
-                          </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <button mat-flat-button color="primary" type="submit">Confirm</button>
-            </form>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel *ngIf="isWalletAdded" hideToggle expanded>
-            <mat-expansion-panel-header>
-                <mat-panel-title>Wallet Added!</mat-panel-title>
-                <mat-panel-description>Remember Mnemonic!</mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <h3>{{mnemonic}}</h3>
-
-            <button mat-flat-button color="accent" (click)="changeIsWalletAddedStatus(false)">Confirm</button>
-            
-        </mat-expansion-panel>
-    </mat-accordion>
+                <h2>Cool you have provider</h2>
+            </mat-expansion-panel>
+    
+            <mat-expansion-panel *ngIf="!isProvider" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Please Connect Web3 Provider
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <mat-icon style="margin-right: 10px;" matBadge="!" matBadgeColor="warn" matBadgeSize="small">account_balance_wallet</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+    
+                <button mat-flat-button color="accent" (click)="connectMetamask()">Metamask</button>
+                <button mat-flat-button color="accent" (click)="connectWalletConnect()">Wallet Conect</button>
+    
+            </mat-expansion-panel>
+        </mat-accordion>
+    
+        <mat-accordion class="wallets">
+            <mat-expansion-panel *ngFor="let wallet of User.user!.wallets!" hideToggle> <!-- problem with loading, ho to set closed status? -->
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{wallet.walletname}}</mat-panel-title>
+                    <mat-panel-description>icon</mat-panel-description>
+                </mat-expansion-panel-header>
+    
+                <mat-accordion *ngIf="wallet.accounts" class="accounts">
+                    <mat-expansion-panel *ngFor="let account of wallet.accounts!" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{account.currency}}</mat-panel-title>
+                            <mat-panel-description>{{account.balance.accountBalance}}</mat-panel-description>
+                        </mat-expansion-panel-header>
+    
+                        <!-- <mat-table [dataSource]="account.account.deposits!" class="mat-elevation-z8">
+                            <ng-container matColumnDef="xpub">
+                                <th mat-header-cell *matHeaderCellDef> xpub </th>
+                                <td mat-cell *matCellDef="let element"> {{element.deposit.xpub}} </td>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="address">
+                                <th mat-header-cell *matHeaderCellDef> address </th>
+                                <td mat-cell *matCellDef="let element"> {{element.deposit.address}} </td>
+                            </ng-container>
+    
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </mat-table> -->    <!-- leave for wallets settings component -->
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-expansion-panel>
+    
+            <mat-expansion-panel *ngIf="isAddAccount" hideToggle expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>New Account</mat-panel-title>
+                    <mat-panel-description>Choose Currency and Wallet</mat-panel-description>
+                </mat-expansion-panel-header>
+    
+                <form name="accountForm" [formGroup]="accountForm" (ngSubmit)="createAccount(accountForm)" fxLayout="column" fxLayoutAlign="start center">
+                    <div style="width: 100%;" fxLayout="row" fxLayoutAlign="space-between center">
+                        <mat-form-field class="select" appearance="outline">
+                            <mat-label i18n>Account Currency</mat-label>
+                            <mat-select formControlName="currency">
+                                <mat-option *ngFor="let cur of currency" [value]="cur.value">{{cur.viewValue}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+    
+                        <mat-form-field class="select" appearance="outline">
+                            <mat-label i18n>Wallet</mat-label>
+                            <mat-select formControlName="xpub">
+                                <mat-option *ngFor="let xpub of xpubs" [value]="xpub.value">{{xpub.viewValue}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                    <button mat-flat-button color="primary" type="submit">Confirm</button>
+                </form>
+            </mat-expansion-panel>
+    
+            <mat-expansion-panel *ngIf="isAccountAdded" hideToggle expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Account Added!</mat-panel-title>
+                    <mat-panel-description>(0__0)</mat-panel-description>
+                </mat-expansion-panel-header>
+    
+                <h3>Nice!!!</h3>
+    
+                <button mat-flat-button color="accent" (click)="changeAccountAddedStatus(false)">Confirm</button>
+                
+            </mat-expansion-panel>
+    
+            <mat-expansion-panel *ngIf="isAddWallet" hideToggle expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>New Wallet</mat-panel-title>
+                    <mat-panel-description>Choose Currency and Wallet Name</mat-panel-description>
+                </mat-expansion-panel-header>
+    
+                <form name="walletForm" [formGroup]="walletForm" (ngSubmit)="createWallet(walletForm)" fxLayout="column" fxLayoutAlign="start center">
+                    <div style="width: 100%;" fxLayout="row" fxLayoutAlign="space-between center">
+                        <mat-form-field class="input" appearance="outline">
+                            <mat-label i18n>Wallet Name</mat-label>
+                            <input matInput formControlName="walletname"> <!-- [type]="hidePassword ? 'password' : 'text'" -->
+                            <!-- <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+                            <mat-error *ngIf="walletForm.get('walletname')?.hasError('required')" i18n>Please enter Wallet Name.</mat-error>
+                            <!-- <mat-error *ngIf="registerForm2.get('password')?.hasError('minlength')" i18n>Your password is too short.</mat-error> -->
+                            <!-- <mat-error *ngIf="registerForm1.get('password')?.hasError('pattern')">
+                                {{registerForm1.get('password').errors.pattern.msg}}
+                            </mat-error> -->
+                            <!-- <mat-error *ngIf="registerForm1.get('password')?.errors?.serverError">
+                                {{ registerForm1.get('password').errors?.serverError }}
+                            </mat-error> -->
+                        </mat-form-field>
+    
+                        <mat-form-field class="select" appearance="outline">
+                            <mat-label i18n>Wallet Currency</mat-label>
+                            <mat-select formControlName="currency">
+                                <mat-option *ngFor="let cur of currency" [value]="cur.value">{{cur.viewValue}}</mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                    <button mat-flat-button color="primary" type="submit">Confirm</button>
+                </form>
+            </mat-expansion-panel>
+    
+            <mat-expansion-panel *ngIf="isWalletAdded" hideToggle expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Wallet Added!</mat-panel-title>
+                    <mat-panel-description>Remember Mnemonic!</mat-panel-description>
+                </mat-expansion-panel-header>
+    
+                <h3>{{mnemonic}}</h3>
+    
+                <button mat-flat-button color="accent" (click)="changeIsWalletAddedStatus(false)">Confirm</button>
+                
+            </mat-expansion-panel>
+        </mat-accordion>    
+    </div>
 
     <div style="width: 100%;">
         <button *ngIf="!isAddAccount" mat-flat-button color="accent" (click)="changeAddAccStatus(true)">Add Account</button>

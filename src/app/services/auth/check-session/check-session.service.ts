@@ -54,7 +54,7 @@ export class CheckSessionService extends BaseUsermgrService {
 
         if (res.status === "connected") {
           this.loginProviderService.initSDKwithProvider(res.connection.wallet);
-        } else {
+        } else if (res.status === "disconnected") {
           this.loginProviderService.initSDKwiithOutProvider();
         }
 
