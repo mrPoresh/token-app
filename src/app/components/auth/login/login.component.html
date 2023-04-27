@@ -3,12 +3,12 @@
     
     <div id="login-form">
         <form name="loginForm" [formGroup]="loginForm"  fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onSubmit(loginForm)">
-            <mat-form-field >   <!-- appearance="legacy" -->
+            <mat-form-field class="input">   <!-- appearance="legacy" -->
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="some@email.com" formControlName="username" type="text">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="input">
                 <mat-label>Password</mat-label>
                 <input matInput formControlName="password">
             </mat-form-field>
