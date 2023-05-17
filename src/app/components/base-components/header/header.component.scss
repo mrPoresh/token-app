@@ -46,7 +46,7 @@
     }
 }
 
-mat-form-field {
+.input-search {
     width: 100%;
 
     mat-icon {
@@ -54,7 +54,7 @@ mat-form-field {
     }
 }
 
-::ng-deep mat-form-field {
+::ng-deep .input-search {
     .mdc-text-field {
         border-radius: 15px !important;
     }

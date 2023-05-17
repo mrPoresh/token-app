@@ -12,8 +12,16 @@ export class SignupStepTwoComponent extends BasePageComponent implements OnInit 
 
   currency: any[] = [
     {value: 'LTC', viewValue: 'LTC'},
+    {value: 'MATIC', viewValue: 'MATIC'},
     {value: 'ETH', viewValue: 'ETH'},
-    {value: 'BTC', viewValue: 'BTC'},
+    {value: 'BSC', viewValue: 'BSC'},
+  ];
+
+  chains: any[] = [
+    {value: 'litecoin', viewValue: 'LTC'},
+    {value: 'polygon', viewValue: 'MATIC'},
+    {value: 'ethereum', viewValue: 'ETH'},
+    {value: 'bsc', viewValue: 'BSC'},
   ];
 
   formSubmited = false;
@@ -22,6 +30,7 @@ export class SignupStepTwoComponent extends BasePageComponent implements OnInit 
     firstname: new FormControl('', [ Validators.required ]),
     surname: new FormControl('', [ Validators.required ]),
     currency: new FormControl(''),
+    chain: new FormControl(''),
     acceptTerms: new FormControl('', [ Validators.required ]),
     emailSpam: new FormControl('', [ Validators.required ]),
   });

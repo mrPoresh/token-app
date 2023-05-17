@@ -47,7 +47,11 @@ mat-label {
     padding-left: 15px;
 }
 
-::ng-deep .mat-form-field {
+::ng-deep .input {
+    .mdc-text-field {
+        border-radius: 15px !important;
+    }
+
     .mat-input-element {
         color: #000000;
     }
@@ -69,7 +73,7 @@ mat-label {
     }
 }
 
-::ng-deep .mat-form-field.mat-focused {
+::ng-deep .input.mat-focused {
     .mat-form-field-label {
         color: #3C71CE;
     }

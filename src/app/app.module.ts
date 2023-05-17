@@ -29,6 +29,8 @@ import { CheckSessionService } from './services/auth/check-session/check-session
 import { CookieService } from 'ngx-cookie-service';
 import { BaseProviderService } from './services/provider/base-provider.service';
 import { LoginProviderService } from './services/provider/login-provider.service';
+import { SignupStepFourComponent } from './components/auth/signup/signup-step-four/signup-step-four.component';
+import { TradeSlideComponent } from './components/slide-menu/trade-slide/trade-slide.component';
 
 
 @NgModule({
@@ -43,6 +45,7 @@ import { LoginProviderService } from './services/provider/login-provider.service
     SignupStepOneComponent,
     SignupStepTwoComponent,
     SignupStepThreeComponent,
+    SignupStepFourComponent,
     LoaderComponent,
     WalletSlideComponent,
     UserSlideComponent,
@@ -51,6 +54,7 @@ import { LoginProviderService } from './services/provider/login-provider.service
     CardComponent,
     HeaderComponent,
     CardListComponent,
+    TradeSlideComponent,
   ],
   imports: [
     BrowserModule,

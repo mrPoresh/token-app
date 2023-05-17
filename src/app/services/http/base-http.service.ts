@@ -19,6 +19,9 @@ export const GET_FRONT_LISTS: string = '/nfts/getFrontListsData';
 export const GET_FRONT_TABS_VOLUME: string = '/nfts/getFrontTabsByVolume';
 export const GET_FRONT_TABS_MINT: string = '/nfts/getFrontTabsByMints';
 
+export const GET_PRICE_CONVERSION: string = '/trade/getPriceConversion';
+export const TRADE_WITH_MASTER: string = '/trade/tradeWithMaster';
+
 @Injectable({
   providedIn: 'root'
 })

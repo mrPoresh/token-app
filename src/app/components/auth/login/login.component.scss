@@ -44,6 +44,10 @@ mat-label {
 }
 
 ::ng-deep .input {
+    .mdc-text-field {
+        border-radius: 15px !important;
+    }
+    
     .mat-input-element {
         color: #000000;
     }
@@ -63,11 +67,6 @@ mat-label {
     .mat-form-field-required-marker {
         color: #000000;
     }
-
-    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-        background-color: #A1A4B2;
-    }
-
 }
 
 ::ng-deep .input.mat-focused {

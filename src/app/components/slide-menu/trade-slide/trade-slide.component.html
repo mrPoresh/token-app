@@ -1,0 +1,61 @@
+<div class="trade-wrapper">
+    <div id="trade-form">
+        <form name="tradeForm" [formGroup]="tradeForm" fxLayout="column" fxLayoutAlign=" center"> <!-- (ngSubmit)="createAccount(accountForm)" -->
+            <div class="content">
+                <div class="pair-container">
+                    <mat-form-field class="large-select" appearance="outline">
+                        <mat-label i18n>Choose Pair</mat-label>
+                        <mat-select formControlName="pair" (selectionChange)="onPairSelected($event.value)">
+                            <mat-option *ngFor="let pair of trade_pairs" [value]="pair">{{pair}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <h2 style="margin: 0;">Exchange rate: {{conversion_string}}</h2>
+                </div>
+
+                <div class="sell-container">
+                    <div class="change-amount">
+                        <h2 style="margin-bottom: 15px; margin-right: 15px;">Change: </h2>
+                        <mat-form-field class="small-input" appearance="outline">
+                            <mat-label i18n>Amount</mat-label>
+                            <input matInput formControlName="price">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="change-account">        <!-- out account -->
+                        <h2 style="margin-bottom: 15px; margin-right: 15px;">  From: </h2>
+                        <mat-form-field class="small-select" appearance="outline">
+                            <mat-label i18n>Choose Account</mat-label>
+                            <mat-select formControlName="out_id">
+                                <mat-option *ngFor="let account of sell_accounts" [value]="account.id">{{account.id}} {{account.currency}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="buy-container">
+                    <div class="buy-amount">
+                        <h2 style="margin-bottom: 15px; margin-right: 15px;">You get: </h2>
+                        <h2>{{conversion_final}}</h2>
+                    </div>
+
+                    <div class="buy-account">        <!-- out account -->
+                        <h2 style="margin-bottom: 15px; margin-right: 15px;">  From: </h2>
+                        <mat-form-field class="small-select" appearance="outline">
+                            <mat-label i18n>Choose Account</mat-label>
+                            <mat-select formControlName="income_id">
+                                <mat-option *ngFor="let account of buy_accounts" [value]="account.id">{{account.id}} {{account.currency}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action" fxLayout="column" fxLayoutAlign="space-around center">
+                <button mat-flat-button color="accent" (click)="priceConversion()">Convent</button>
+                <button mat-flat-button color="primary" (click)="tradeWithMaster()">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>
+

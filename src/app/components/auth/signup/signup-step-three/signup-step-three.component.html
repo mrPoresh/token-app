@@ -1,8 +1,26 @@
 <div class="step-body" fxLayout="column" fxLayoutAlign="center center">
-    <!-- <h3>To activate user profile please check your e-mail and click activation link.</h3> -->
-    <h3>{{mnemonic}}</h3>
+    <div id="signup-form">
+        <form name="registerForm3" [formGroup]="registerForm3" (ngSubmit)="onSubmit(registerForm3)" fxLayout="column" fxLayoutAlign="center center">
+            <div class="options" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-form-field class="select" >
+                    <mat-label i18n>Deposit Amount</mat-label>
+                    <mat-select formControlName="amount">
+                        <mat-option *ngFor="let amount of amounts" [value]="amount.value">{{amount.viewValue}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-    <!-- <div class="buttons">
-        <button mat-flat-button color="primary" type="submit" (click)="closeMenu()">CLOSE</button>
-    </div> -->
+                <mat-form-field class="select" >
+                    <mat-label i18n>Currency</mat-label>
+                    <mat-select formControlName="vc_currency">
+                        <mat-option *ngFor="let currency of vc_currency" [value]="currency.value">{{currency.viewValue}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="buttons">
+                <button mat-flat-button color="primary" type="submit">SUMBIT</button>
+            </div>
+
+        </form>
+    </div>
 </div>

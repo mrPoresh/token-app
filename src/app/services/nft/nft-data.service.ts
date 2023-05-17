@@ -18,7 +18,7 @@ export class NftDataService extends BaseNftmgrService {
   ) { 
     super(http, cookie) 
   }
-
+//
   getFrontPageData() {
     return super.get<GetFrontPageDataResponce>(GET_FRONT_PAGE)
   }

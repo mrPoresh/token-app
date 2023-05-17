@@ -16,7 +16,7 @@ export class BaseWalletsmgrService extends BaseHttpService {
   protected postRequest<T>(url: string, formGroup: FormGroup) {
     const httpOptionsDefault = {
       headers: this.createHeaders(),  /* this.extendHeaders() */
-      withCredentials: true
+      //withCredentials: true
     };
     
     const params = formGroup.value
@@ -28,7 +28,7 @@ export class BaseWalletsmgrService extends BaseHttpService {
   protected get<T>(url: string) {
     const httpOptionsDefault = {
       headers: this.createHeaders(),  /* this.extendHeaders() */
-      withCredentials: true
+      //withCredentials: true
     };
 
     return this.http.get<T>(this.apiUrl + url, { ...httpOptionsDefault })

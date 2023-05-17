@@ -1,0 +1,122 @@
+.trade-wrapper {
+    width: 100%;
+    height: 100%;
+
+    #trade-form {
+        width: 100%;
+        height: 100%;
+
+        form {
+            width: 100%;
+            height: 100%;
+
+            .content {
+                width: 90%;
+                height: 85%;
+
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                align-items: center;
+
+                .pair-container {
+                    width: 100%;
+                    height: 33%;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                }
+
+                .sell-container {
+                    width: 100%;
+                    height: 33%;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    .change-amount {
+                        height: 50%;
+                        width: 100%;
+
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .change-account {
+                        height: 50%;
+                        width: 100%;
+
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                } 
+
+                .buy-container {
+                    width: 100%;
+                    height: 33%;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    .buy-amount {
+                        height: 50%;
+                        width: 100%;
+
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .buy-account {
+                        height: 50%;
+                        width: 100%;
+
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+
+            .action {
+                width: 90%;
+                height: 12%;
+
+                button {
+                    width: 100%;
+                    height: 45% !important;
+                
+                    //margin-top: 6px;
+                
+                    border-radius: 15px;
+                }
+            }
+        }
+    }
+}
+
+.small-input {
+    width: 60%;
+}
+
+.small-select {
+    width: 60%;
+}
+
+.large-select {
+    width: 100%;
+}

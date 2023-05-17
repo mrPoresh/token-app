@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { menuOutlet, loginTrx, signUpTrx, walletTrx, userTrx, frontRootTrx, frontArtTrx, frontGamingTrx, frontPhotoTrx } from './router-translation.labels';
+import { menuOutlet, loginTrx, signUpTrx, walletTrx, userTrx, frontRootTrx, frontArtTrx, frontGamingTrx, frontPhotoTrx, tradeTrx } from './router-translation.labels';
 
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -9,6 +9,7 @@ import { SignupFormComponent } from './components/auth/signup/signup-form/signup
 import { WalletSlideComponent } from './components/slide-menu/wallet-slide/wallet-slide.component';
 import { UserSlideComponent } from './components/slide-menu/user-slide/user-slide.component';
 import { AuthGuard } from './utils/guards/auth.guard';
+import { TradeSlideComponent } from './components/slide-menu/trade-slide/trade-slide.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,9 @@ const routes: Routes = [
   },
   {
     path: userTrx, outlet: menuOutlet, canActivate: [AuthGuard], component: UserSlideComponent
+  },
+  {
+    path: tradeTrx, outlet: menuOutlet, canActivate: [AuthGuard], component: TradeSlideComponent
   }
 
 ];

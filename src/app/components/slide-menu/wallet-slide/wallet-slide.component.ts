@@ -9,6 +9,8 @@ import { LoaderService } from 'src/app/utils/loader.service';
 import { BasePageComponent } from '../../base-components/base-page/base-page.component';
 import { WindowProviderService } from 'src/app/utils/window-provider.service';
 import { LoginProviderService } from 'src/app/services/provider/login-provider.service';
+import { menuOutlet, tradeTrx } from 'src/app/router-translation.labels';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wallet-slide',
@@ -18,12 +20,15 @@ import { LoginProviderService } from 'src/app/services/provider/login-provider.s
 export class WalletSlideComponent extends BasePageComponent implements OnInit {
 
   /* public displayedColumns: string[] = ['xpub', 'address']; */
+  tradeTrx = tradeTrx;
 
   public currency: any[] = [
     {value: 'LTC', viewValue: 'LTC'},
     {value: 'ETH', viewValue: 'ETH'},
     {value: 'BTC', viewValue: 'BTC'},
   ];
+
+  public vc_currency = 'VC_USD';
 
   public xpubs: any[] = [];
   public options: any[] = [];
@@ -57,6 +62,7 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
     private userInfoService: UserInfoService,
     public winRef: WindowProviderService,
     private loginProviderService: LoginProviderService,
+    private router: Router,
   ) {
     super();
     this.loader.show({status: true});
@@ -206,6 +212,10 @@ export class WalletSlideComponent extends BasePageComponent implements OnInit {
 
     });
 
+  }
+
+  navigateSlideMenu(url: string) {
+    this.router.navigate([{ outlets: { [menuOutlet] : [url] }}]);
   }
 
 }

@@ -154,5 +154,6 @@
         <button *ngIf="isAddAccount" mat-flat-button color="warn" (click)="changeAddAccStatus(false)">Cancel</button>
         <button *ngIf="!isAddWallet" mat-flat-button color="accent" (click)="changeAddWalletStatus(true)">Add Wallet</button>
         <button *ngIf="isAddWallet" mat-flat-button color="warn" (click)="changeAddWalletStatus(false)">Cancel</button>
+        <button mat-flat-button color="primary" (click)="navigateSlideMenu(tradeTrx)">Exchanger</button>
     </div>
 </div>
